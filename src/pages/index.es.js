@@ -31,7 +31,7 @@ const IndexPage = ({ data }) => (
 export default IndexPage
 
 export const query = graphql`
-  query IndexQuery {
+  query IndexQueryEs {
     allDatoCmsWork( sort: { fields: [position], order: ASC }) {
       edges {
         node {

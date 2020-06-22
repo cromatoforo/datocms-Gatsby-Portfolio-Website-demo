@@ -3,6 +3,10 @@ require('dotenv').config()
 module.exports = {
   siteMetadata: {
     title: `Lazum Site and Store`,
+    languages: {
+      langs: ['en', 'es'],
+      defaultLangKey: 'en'
+    }
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -20,7 +24,7 @@ module.exports = {
         langKeyDefault: 'en',
         langKeyForNull: 'en',
         prefixDefault: true,
-        useLangKeyLayout: false,
+        useLangKeyLayout: true,
       }
     }
   ],
