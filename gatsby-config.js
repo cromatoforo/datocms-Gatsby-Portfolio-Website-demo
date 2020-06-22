@@ -14,5 +14,14 @@ module.exports = {
         apiToken: process.env.DATO_API_TOKEN,
       },
     },
+    {
+      resolve: 'gatsby-plugin-i18n',
+      options: {        
+        langKeyDefault: 'en',
+        langKeyForNull: 'en',
+        prefixDefault: true,
+        useLangKeyLayout: false,
+      }
+    }
   ],
 }
