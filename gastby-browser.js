@@ -3,5 +3,3 @@ exports.onClientEntry = () => {
         window.location.pathname = `/en`
     }
 }
-
-  
