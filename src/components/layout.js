@@ -5,15 +5,29 @@ import PropTypes from "prop-types";
 import { Link } from "gatsby";
 import { StaticQuery, graphql } from "gatsby";
 import { HelmetDatoCms } from "gatsby-source-datocms";
+import { getCurrentLangKey, getLangs, getUrlForLang } from 'ptz-i18n';
+import { IntlProvider, FormattedMessage } from 'react-intl';
+import SelectLanguage from './SelectLanguage';
+import LocalizedLink from '../utils/LocalizedLink';
 
 import "../styles/index.sass";
 
 const TemplateWrapper = ({ children }) => {
   const [showMenu, setShowMenu] = useState(false);
+
   return (
+
     <StaticQuery
       query={graphql`
         query LayoutQuery {
+          site {
+            siteMetadata {
+              languages {
+                defaultLangKey
+                langs
+              }
+            }
+          }
           datoCmsSite {
             globalSeo {
               siteName
@@ -22,7 +36,7 @@ const TemplateWrapper = ({ children }) => {
               ...GatsbyDatoCmsFaviconMetaTags
             }
           }
-          datoCmsHome {
+          homeEs: datoCmsHome(locale: { eq: "es" }) {
             seoMetaTags {
               ...GatsbyDatoCmsSeoMetaTags
             }
@@ -33,7 +47,21 @@ const TemplateWrapper = ({ children }) => {
             }
             copyright
           }
-          allDatoCmsSocialProfile(sort: { fields: [position], order: ASC }) {
+          homeEn: datoCmsHome(locale: { eq: "en" }) {
+            seoMetaTags {
+              ...GatsbyDatoCmsSeoMetaTags
+            }
+            introTextNode {
+              childMarkdownRemark {
+                html
+              }
+            }
+            copyright
+          }
+          allDatoCmsSocialProfile(
+            filter: { locale: { eq: "es" } }
+            sort: { fields: [position], order: ASC }
+          ) {
             edges {
               node {
                 profileType
@@ -44,10 +72,14 @@ const TemplateWrapper = ({ children }) => {
         }
       `}
       render={data => (
+        <IntlProvider
+        locale={getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, window.location.pathname)}
+        messages={require(`../data/messages/${getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, window.location.pathname)}`)}
+      >
         <div className={`container ${showMenu ? "is-open" : ""}`}>
           <HelmetDatoCms
             favicon={data.datoCmsSite.faviconMetaTags}
-            seo={data.datoCmsHome.seoMetaTags}
+            seo={data.homeEn.seoMetaTags}
           />
           <div className="container__sidebar">
             <div className="sidebar">
@@ -58,15 +90,18 @@ const TemplateWrapper = ({ children }) => {
                 className="sidebar__intro"
                 dangerouslySetInnerHTML={{
                   __html:
-                    data.datoCmsHome.introTextNode.childMarkdownRemark.html
+                  getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, window.location.pathname) === 'es' ? data.homeEs.introTextNode.childMarkdownRemark.html : data.homeEn.introTextNode.childMarkdownRemark.html
                 }}
               />
               <ul className="sidebar__menu">
                 <li>
-                  <Link to="/">Home</Link>
+                  <LocalizedLink to="/"><FormattedMessage id="home" /></LocalizedLink>
                 </li>
                 <li>
-                  <Link to="/about">About</Link>
+                  <Link to="/store"><FormattedMessage id="store" /></Link>
+                </li>
+                <li>
+                  <LocalizedLink to="/about"><FormattedMessage id="about" /></LocalizedLink>
                 </li>
               </ul>
               <p className="sidebar__social">
@@ -81,8 +116,10 @@ const TemplateWrapper = ({ children }) => {
                   </a>
                 ))}
               </p>
+              <SelectLanguage langs={getLangs(data.site.siteMetadata.languages.langs, getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, window.location.pathname), getUrlForLang(`/${getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, window.location.pathname)}/`, window.location.pathname))} />
+              <br/>
               <div className="sidebar__copyright">
-                {data.datoCmsHome.copyright}
+                {data.homeEs.copyright}
               </div>
             </div>
           </div>
@@ -105,6 +142,7 @@ const TemplateWrapper = ({ children }) => {
             {children}
           </div>
         </div>
+        </IntlProvider>
       )}
     />
   );

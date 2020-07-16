@@ -10,21 +10,36 @@ exports.createPages = ({ graphql, actions }) => {
         works: allDatoCmsWork {
           edges {
             node {
+              locale
               slug
             }
           }
         }
       }
     `).then(result => {
+      //
       result.data.works.edges.map(({ node: work }) => {
         createPage({
-          path: `works/${work.slug}`,
+          path: `en/works/${work.slug}`,
           component: path.resolve(`./src/templates/work.js`),
           context: {
             slug: work.slug,
+            locale:'en',
           },
         })
       })
+      //
+      result.data.works.edges.map(({ node: work }) => {
+        createPage({
+          path: `es/works/${work.slug}`,
+          component: path.resolve(`./src/templates/work.js`),
+          context: {
+            slug: work.slug,
+            locale: 'es',
+          },
+        })
+      })
+      //
       resolve()
     })
   })
