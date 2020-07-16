@@ -91,7 +91,7 @@ const TemplateWrapper = ({ children }) => {
                 className="sidebar__intro"
                 dangerouslySetInnerHTML={{
                   __html:
-                  typeof window !== `undefined` ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname):null === 'es' ? data.homeEs.introTextNode.childMarkdownRemark.html : data.homeEn.introTextNode.childMarkdownRemark.html
+                  typeof window !== `undefined` ? (getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) === 'es' ? data.homeEs.introTextNode.childMarkdownRemark.html : data.homeEn.introTextNode.childMarkdownRemark.html):null
                 }}
               />
               <ul className="sidebar__menu">
