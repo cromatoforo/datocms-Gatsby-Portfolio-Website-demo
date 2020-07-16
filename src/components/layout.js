@@ -15,9 +15,7 @@ import "../styles/index.sass";
 const TemplateWrapper = ({ children }) => {
   const [showMenu, setShowMenu] = useState(false);
   const pathname = typeof window !== `undefined` ? window.location.pathname: null
-
-
-
+  
   return (
 
     <StaticQuery
@@ -77,7 +75,7 @@ const TemplateWrapper = ({ children }) => {
       render={data => (
         <IntlProvider
         locale={typeof window !== `undefined` ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname):null}
-        messages={typeof window !== `undefined` ? require(`../data/messages/${getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)}`):null}
+        messages={typeof window !== `undefined` ? require(`../data/messages/${typeof window !== `undefined` ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname):null}`):null}
       >
         <div className={`container ${showMenu ? "is-open" : ""}`}>
           <HelmetDatoCms
@@ -119,7 +117,7 @@ const TemplateWrapper = ({ children }) => {
                   </a>
                 ))}
               </p>
-              <SelectLanguage langs={typeof window !== `undefined` ? getLangs(data.site.siteMetadata.languages.langs, getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname), getUrlForLang(`/${getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)}/`, pathname)):null} />
+              <SelectLanguage langs={typeof window !== `undefined` ? getLangs(data.site.siteMetadata.languages.langs, typeof window !== `undefined` ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname):null, typeof window !== `undefined` ? getUrlForLang(`/${getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)}/`, pathname):null):null} />
               <br/>
               <div className="sidebar__copyright">
                 {data.homeEs.copyright}
