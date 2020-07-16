@@ -73,8 +73,8 @@ const TemplateWrapper = ({ children }) => {
       `}
       render={data => (
         <IntlProvider
-        locale={getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, window.location.pathname)}
-        messages={require(`../data/messages/${getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, window.location.pathname)}`)}
+        locale={getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, window && window.location.pathname)}
+        messages={require(`../data/messages/${getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, window && window.location.pathname)}`)}
       >
         <div className={`container ${showMenu ? "is-open" : ""}`}>
           <HelmetDatoCms
@@ -90,7 +90,7 @@ const TemplateWrapper = ({ children }) => {
                 className="sidebar__intro"
                 dangerouslySetInnerHTML={{
                   __html:
-                  getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, window.location.pathname) === 'es' ? data.homeEs.introTextNode.childMarkdownRemark.html : data.homeEn.introTextNode.childMarkdownRemark.html
+                  getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, window && window.location.pathname) === 'es' ? data.homeEs.introTextNode.childMarkdownRemark.html : data.homeEn.introTextNode.childMarkdownRemark.html
                 }}
               />
               <ul className="sidebar__menu">
@@ -98,7 +98,7 @@ const TemplateWrapper = ({ children }) => {
                   <LocalizedLink to="/"><FormattedMessage id="home" /></LocalizedLink>
                 </li>
                 <li>
-                  <Link to="/store"><FormattedMessage id="store" /></Link>
+                  <LocalizedLink to="/"><FormattedMessage id="store" /></LocalizedLink>
                 </li>
                 <li>
                   <LocalizedLink to="/about"><FormattedMessage id="about" /></LocalizedLink>
@@ -116,7 +116,7 @@ const TemplateWrapper = ({ children }) => {
                   </a>
                 ))}
               </p>
-              <SelectLanguage langs={getLangs(data.site.siteMetadata.languages.langs, getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, window.location.pathname), getUrlForLang(`/${getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, window.location.pathname)}/`, window.location.pathname))} />
+              <SelectLanguage langs={getLangs(data.site.siteMetadata.languages.langs, getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, window && window.location.pathname), getUrlForLang(`/${getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, window && window.location.pathname)}/`, window && window.location.pathname))} />
               <br/>
               <div className="sidebar__copyright">
                 {data.homeEs.copyright}
