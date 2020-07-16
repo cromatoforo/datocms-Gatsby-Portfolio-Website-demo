@@ -18,27 +18,27 @@ exports.createPages = ({ graphql, actions }) => {
       }
     `).then(result => {
       //
-      result.data.works.edges.map(({ node: work }) => {
-        createPage({
-          path: `en/works/${work.slug}`,
-          component: path.resolve(`./src/templates/work.js`),
-          context: {
-            slug: work.slug,
-            locale:'en',
-          },
-        })
-      })
-      //
-      result.data.works.edges.map(({ node: work }) => {
-        createPage({
-          path: `es/works/${work.slug}`,
-          component: path.resolve(`./src/templates/work.js`),
-          context: {
-            slug: work.slug,
-            locale: 'es',
-          },
-        })
-      })
+      // result.data.works.edges.map(({ node: work }) => {
+      //   createPage({
+      //     path: `en/works/${work.slug}`,
+      //     component: path.resolve(`./src/templates/work.js`),
+      //     context: {
+      //       slug: work.slug,
+      //       locale:'en',
+      //     },
+      //   })
+      // })
+      // //
+      // result.data.works.edges.map(({ node: work }) => {
+      //   createPage({
+      //     path: `es/works/${work.slug}`,
+      //     component: path.resolve(`./src/templates/work.js`),
+      //     context: {
+      //       slug: work.slug,
+      //       locale: 'es',
+      //     },
+      //   })
+      // })
       //
       resolve()
     })
