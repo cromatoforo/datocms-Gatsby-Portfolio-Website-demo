@@ -16,6 +16,8 @@ const TemplateWrapper = ({ children }) => {
   const [showMenu, setShowMenu] = useState(false);
   const pathname = typeof window !== `undefined` ? window.location.pathname: null
 
+
+
   return (
 
     <StaticQuery
@@ -75,7 +77,7 @@ const TemplateWrapper = ({ children }) => {
       render={data => (
         <IntlProvider
         locale={getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)}
-        messages={require(`../data/messages/${getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)}`)}
+        messages={typeof window !== `undefined` ? require(`../data/messages/${getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)}`):null}
       >
         <div className={`container ${showMenu ? "is-open" : ""}`}>
           <HelmetDatoCms
@@ -117,7 +119,7 @@ const TemplateWrapper = ({ children }) => {
                   </a>
                 ))}
               </p>
-              <SelectLanguage langs={getLangs(data.site.siteMetadata.languages.langs, getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname), getUrlForLang(`/${getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)}/`, pathname))} />
+              <SelectLanguage langs={typeof window !== `undefined` ? getLangs(data.site.siteMetadata.languages.langs, getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname), getUrlForLang(`/${getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)}/`, pathname)):null} />
               <br/>
               <div className="sidebar__copyright">
                 {data.homeEs.copyright}
