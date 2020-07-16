@@ -91,7 +91,7 @@ const TemplateWrapper = ({ children }) => {
                 className="sidebar__intro"
                 dangerouslySetInnerHTML={{
                   __html:
-                  getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) === 'es' ? data.homeEs.introTextNode.childMarkdownRemark.html : data.homeEn.introTextNode.childMarkdownRemark.html
+                  typeof window !== `undefined` ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname):null === 'es' ? data.homeEs.introTextNode.childMarkdownRemark.html : data.homeEn.introTextNode.childMarkdownRemark.html
                 }}
               />
               <ul className="sidebar__menu">
@@ -117,7 +117,7 @@ const TemplateWrapper = ({ children }) => {
                   </a>
                 ))}
               </p>
-              <SelectLanguage langs={typeof window !== `undefined` ? getLangs(data.site.siteMetadata.languages.langs, typeof window !== `undefined` ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname):null, typeof window !== `undefined` ? getUrlForLang(`/${getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)}/`, pathname):null):null} />
+              <SelectLanguage langs={typeof window !== `undefined` ? getLangs(data.site.siteMetadata.languages.langs, typeof window !== `undefined` ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname):null, typeof window !== `undefined` ? getUrlForLang(`/${typeof window !== `undefined` ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname):null}/`, pathname):null):null} />
               <br/>
               <div className="sidebar__copyright">
                 {data.homeEs.copyright}
