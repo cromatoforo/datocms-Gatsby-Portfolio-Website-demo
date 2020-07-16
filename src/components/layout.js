@@ -76,7 +76,7 @@ const TemplateWrapper = ({ children }) => {
       `}
       render={data => (
         <IntlProvider
-        locale={getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)}
+        locale={typeof window !== `undefined` ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname):null}
         messages={typeof window !== `undefined` ? require(`../data/messages/${getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)}`):null}
       >
         <div className={`container ${showMenu ? "is-open" : ""}`}>
