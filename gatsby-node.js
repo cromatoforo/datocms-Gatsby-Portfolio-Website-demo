@@ -15,8 +15,39 @@ exports.createPages = ({ graphql, actions }) => {
             }
           }
         }
+        products: allDatoCmsProduct {
+          edges {
+            node {
+              locale
+              slug
+            }
+          }
+        }
       }
     `).then(result => {
+           //
+      result.data.products.edges.map(({ node: product }) => {
+        createPage({
+          path: `en/products/${product.slug}`,
+          component: path.resolve(`./src/templates/product.js`),
+          context: {
+            slug: product.slug,
+            locale:'en',
+          },
+        })
+      })
+      //
+      result.data.products.edges.map(({ node: product }) => {
+        createPage({
+          path: `es/products/${product.slug}`,
+          component: path.resolve(`./src/templates/product.js`),
+          context: {
+            slug: product.slug,
+            locale: 'es',
+          },
+        })
+      })
+      //
       //
       result.data.works.edges.map(({ node: work }) => {
         createPage({
