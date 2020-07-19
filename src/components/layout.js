@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-has-content, jsx-a11y/anchor-is-valid*/
 
-import React, { useState, useEffect, createRef } from "react";
+import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
 import { Link } from "gatsby";
 import { StaticQuery, graphql } from "gatsby";
@@ -9,8 +9,32 @@ import { getCurrentLangKey, getLangs, getUrlForLang } from 'ptz-i18n';
 import { IntlProvider, FormattedMessage } from 'react-intl';
 import SelectLanguage from './SelectLanguage';
 import LocalizedLink from '../utils/LocalizedLink';
+import {SnipcartContext} from 'gatsby-plugin-snipcart-advanced/context';
+
 
 import "../styles/index.sass";
+
+
+const MyComponent = () => {
+  const {state} = useContext(SnipcartContext);
+  const {userStatus, cartQuantity} = state;
+return (
+    <div>
+      {userStatus === 'SignedOut' ? (
+        <button className="snipcart-customer-signin">
+          <span>Se connecter</span>
+        </button>
+      ) : (
+        <button className="snipcart-customer-signin">
+          <span>Mon compte</span>
+        </button>
+      )}
+      <button className="snipcart-checkout">
+        <span>{cartQuantity}</span>
+      </button>
+    </div>
+  );
+}
 
 const RenderLogo = (props) => {
   return (
@@ -113,6 +137,9 @@ const TemplateWrapper = ({ children }) => {
                   <LocalizedLink to="/"><FormattedMessage id="home" /></LocalizedLink>
                 </li>
                 <li>
+                  <LocalizedLink to="/projects"><FormattedMessage id="projects" /></LocalizedLink>
+                </li>
+                <li>
                   <LocalizedLink to="/store"><FormattedMessage id="store" /></LocalizedLink>
                 </li>
                 <li>
@@ -132,6 +159,8 @@ const TemplateWrapper = ({ children }) => {
                 ))}
               </p>
               <SelectLanguage langs={typeof window !== `undefined` ? getLangs(data.site.siteMetadata.languages.langs, typeof window !== `undefined` ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname):null, typeof window !== `undefined` ? getUrlForLang(`/${typeof window !== `undefined` ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname):null}/`, pathname):null):null} />
+              <br/>
+              <MyComponent/>
               <br/>
               <div className="sidebar__copyright">
                 {data.homeEs.copyright}

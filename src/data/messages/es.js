@@ -1,6 +1,7 @@
 module.exports = {
-  'selectLanguage': 'Escoge tu idioma',
+  'selectLanguage': 'Language / Idioma:',
   'home': 'Inicio',
   'store': 'Tienda',
+  'projects': 'Proyectos',
   'about': 'Sobre'
 };

@@ -24,5 +24,26 @@ module.exports = {
         apiToken: process.env.DATO_API_TOKEN,
       },
     },
+    {
+      resolve: `gatsby-plugin-snipcart-advanced`,
+      options: {
+          version: '3.0.15',
+          publicApiKey: '#####', // use public api key here or in environment variable
+          defaultLang: 'en',
+          currency: 'usd',
+          openCartOnAdd: true,
+          locales: {
+          en: {
+              actions: {
+                checkout: 'Valider le panier',
+              },
+            }
+          },
+          innerHTML: `
+          <billing section="bottom">
+              <div>Your Text Here</div>
+          </billing>`,
+      },
+  },
   ],
 }

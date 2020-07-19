@@ -1,6 +1,7 @@
 module.exports = {
-  'selectLanguage': 'Select your language',
+  'selectLanguage': 'Idioma / Language:',
   'home': 'Home',
   'store': 'Store',
+  'projects': 'Projects',
   'about': 'About',
 };

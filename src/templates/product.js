@@ -10,8 +10,8 @@ export default ({ data }) => (
     <article className="sheet">
       <HelmetDatoCms seo={data.datoCmsProduct.seoMetaTags} />
       <div className="sheet__inner">
-        <h1 className="sheet__name">{data.datoCmsProduct.name}</h1>
-        <p className="sheet__lead">{data.datoCmsProduct.excerpt}</p>
+        <h1 className="sheet__title">{data.datoCmsProduct.name}</h1>
+        <br/>
         <div className="sheet__slider">
           <Slider infinite={true} dots={true} slidesToShow={1} arrows={true} speed={500}>
             {data.datoCmsProduct.gallery.map(({ fluid }) => (
@@ -22,11 +22,17 @@ export default ({ data }) => (
         <div
           className="sheet__body"
           dangerouslySetInnerHTML={{
+            __html: data.datoCmsProduct.materialsNode.childMarkdownRemark.html,
+          }}
+        />
+        <div
+          className="sheet__body"
+          dangerouslySetInnerHTML={{
             __html: data.datoCmsProduct.descriptionNode.childMarkdownRemark.html,
           }}
         />
         <div className="sheet__gallery">
-          <Img fluid={data.datoCmsProduct.coverImage.fluid} />
+          <Img fluid={data.datoCmsProduct.cardPhoto.fluid} />
         </div>
       </div>
     </article>
@@ -46,12 +52,17 @@ export const query = graphql`
           src
         }
       }
+      materialsNode {
+        childMarkdownRemark {
+          html
+        }
+      }
       descriptionNode {
         childMarkdownRemark {
           html
         }
       }
-      coverImage {
+      cardPhoto {
         url
         fluid(maxWidth: 600, imgixParams: { fm: "jpg", auto: "compress" }) {
           ...GatsbyDatoCmsSizes

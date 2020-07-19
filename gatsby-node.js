@@ -51,7 +51,7 @@ exports.createPages = ({ graphql, actions }) => {
       //
       result.data.works.edges.map(({ node: work }) => {
         createPage({
-          path: `en/works/${work.slug}`,
+          path: `en/projects/${work.slug}`,
           component: path.resolve(`./src/templates/work.js`),
           context: {
             slug: work.slug,
@@ -62,7 +62,7 @@ exports.createPages = ({ graphql, actions }) => {
       //
       result.data.works.edges.map(({ node: work }) => {
         createPage({
-          path: `es/works/${work.slug}`,
+          path: `es/projects/${work.slug}`,
           component: path.resolve(`./src/templates/work.js`),
           context: {
             slug: work.slug,

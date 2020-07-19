@@ -5,7 +5,7 @@ import Img from 'gatsby-image'
 import Layout from "../components/layout"
 import LocalizedLink from '../utils/LocalizedLink';
 
-const IndexPage = ({ data }) => (
+const ProjectsPage = ({ data }) => (
   <Layout>
     <Masonry className="showcase">
       {data.allDatoCmsWork.edges.map(({ node: work }) => (
@@ -29,10 +29,10 @@ const IndexPage = ({ data }) => (
   </Layout>
 )
 
-export default IndexPage
+export default ProjectsPage
 
 export const query = graphql`
-  query IndexQueryEs {
+  query ProjectsQueryEs {
     allDatoCmsWork(
       filter: { locale: { eq: "es" } }
       sort: { fields: [position], order: ASC }

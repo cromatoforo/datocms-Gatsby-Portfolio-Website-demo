@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 import Masonry from 'react-masonry-component'
 import Img from 'gatsby-image'
 import Layout from "../components/layout"
@@ -11,12 +11,12 @@ const IndexPage = ({ data }) => (
       {data.allDatoCmsWork.edges.map(({ node: work }) => (
         <div key={work.id} className="showcase__item">
           <figure className="card">
-            <LocalizedLink to={`/works/${work.slug}`} className="card__image">
+            <LocalizedLink to={`/projects/${work.slug}`} className="card__image">
               <Img fluid={work.coverImage.fluid} />
             </LocalizedLink>
             <figcaption className="card__caption">
               <h6 className="card__title">
-                <LocalizedLink to={`/works/${work.slug}`}>{work.title}</LocalizedLink>
+                <LocalizedLink to={`/projects/${work.slug}`}>{work.title}</LocalizedLink>
               </h6>
               <div className="card__description">
                 <p>{work.excerpt}</p>
