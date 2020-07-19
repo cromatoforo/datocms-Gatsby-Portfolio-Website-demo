@@ -47,7 +47,7 @@ const ProductPage = ({ data }) => (
 export default ProductPage
 
 export const query = graphql`
-  query ProductQueryEn {
+  query ProductQueryEs {
     allDatoCmsProduct(
       filter: { locale: { eq: "es" } }
 
