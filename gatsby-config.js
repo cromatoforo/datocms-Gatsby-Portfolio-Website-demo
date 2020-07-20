@@ -29,20 +29,9 @@ module.exports = {
       options: {
           version: '3.0.15',
           publicApiKey: '#####', // use public api key here or in environment variable
-          defaultLang: 'en',
+          defaultLang: languages.defaultLangKey,
           currency: 'usd',
-          openCartOnAdd: true,
-          locales: {
-          en: {
-              actions: {
-                checkout: 'Valider le panier',
-              },
-            }
-          },
-          innerHTML: `
-          <billing section="bottom">
-              <div>Your Text Here</div>
-          </billing>`,
+          openCartOnAdd: false,
       },
   },
   ],

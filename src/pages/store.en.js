@@ -22,18 +22,18 @@ const ProductPage = ({ data }) => (
               <div className="card__description">
                 <p>{product.excerpt}</p>
               </div>
-              <div className="card__title">
+              <div className="card__button">
                 <Button
                     className="snipcart-add-item"
                     data-item-id={product.id}
                     data-item-price={product.price}
                     data-item-url={product.slug}
                     data-item-description={product.excerpt}
-                    data-item-image={product.coverImage.fluid}
+                    data-item-image={product.coverImage.url}
                     data-item-name={product.name}
                     data-item-quantity="1"
                 >
-                    Add to cart
+                  Add to cart
                 </Button>
               </div>
             </figcaption>
@@ -60,6 +60,7 @@ export const query = graphql`
           price
           excerpt
           coverImage {
+            url
             fluid(maxWidth: 450, imgixParams: { fm: "jpg", auto: "compress" }) {
               ...GatsbyDatoCmsSizes
             }

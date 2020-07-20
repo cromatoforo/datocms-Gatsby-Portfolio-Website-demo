@@ -1,0 +1,12 @@
+# build artifacts
+node_modules
+www
+build
+css/node-sass
+lib/elusive-webfont.css
+lib/typicons.min.css
+package-lock.json
+lib/bulma.css
+css/cyborg-bootstrap.css
+css/cyborg-bootstrap.min.css
+css/style.css

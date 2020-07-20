@@ -4,4 +4,7 @@ module.exports = {
   'store': 'Store',
   'projects': 'Projects',
   'about': 'About',
+  'itemsInCart': 'Items in cart',
+  'cartTotal': 'Cart total',
+  'viewCart': 'View cart',
 };

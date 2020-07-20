@@ -3,5 +3,8 @@ module.exports = {
   'home': 'Inicio',
   'store': 'Tienda',
   'projects': 'Proyectos',
-  'about': 'Sobre'
+  'about': 'Sobre',
+  'itemsInCart': 'Cosas en carro',
+  'cartTotal': 'Total de carro',
+  'viewCart': 'Ver carro',
 };
