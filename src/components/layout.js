@@ -10,14 +10,14 @@ import { IntlProvider, FormattedMessage } from 'react-intl';
 import SelectLanguage from './SelectLanguage';
 import LocalizedLink from '../utils/LocalizedLink';
 import {SnipcartContext} from 'gatsby-plugin-snipcart-advanced/context';
-import { Button, Pane, Text, Icon } from 'evergreen-ui'
+import { Button, Pane, Text } from 'evergreen-ui'
 
 import "../styles/index.sass";
 
 
 const LitteCart = () => {
   const {state} = useContext(SnipcartContext);
-  const {userStatus, cartQuantity, cartTotal} = state;
+  const {cartQuantity, cartTotal} = state;
 return (
     <Pane>
       <Pane>
@@ -52,6 +52,9 @@ const TemplateWrapper = ({ children }) => {
   const [showMenu, setShowMenu] = useState(false);
   const pathname = typeof window !== `undefined` ? window.location.pathname: null
   
+  const {state} = useContext(SnipcartContext);
+  const {cartQuantity} = state;
+
   return (
 
     <StaticQuery
@@ -132,16 +135,16 @@ const TemplateWrapper = ({ children }) => {
                 }}
               />
               <ul className="sidebar__menu">
-                <li className={pathname === `/${getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)}/` && 'is-active'}>
+                <li className={pathname === `/${getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)}/` ? 'is-active' : null}>
                   <LocalizedLink to="/"><FormattedMessage id="home" /></LocalizedLink>
                 </li>
-                <li className={pathname === `/${getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)}/projects` && 'is-active'}>
+                <li className={(pathname.indexOf('/projects') >= 0) ? 'is-active' : null}>
                   <LocalizedLink to="/projects"><FormattedMessage id="projects" /></LocalizedLink>
                 </li>
-                <li className={pathname === `/${getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)}/store` && 'is-active'}>
+                <li className={(pathname.indexOf('/products') >= 0 || pathname.indexOf('/store') >= 0) ? 'is-active' : null}>
                   <LocalizedLink to="/store"><FormattedMessage id="store" /></LocalizedLink>
                 </li>
-                <li className={pathname === `/${getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)}/about` && 'is-active'}>
+                <li className={pathname === `/${getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)}/about` ? 'is-active' : null}>
                   <LocalizedLink to="/about"><FormattedMessage id="about" /></LocalizedLink>
                 </li>
               </ul>
@@ -160,8 +163,12 @@ const TemplateWrapper = ({ children }) => {
               <div>
                 <SelectLanguage langs={typeof window !== `undefined` ? getLangs(data.site.siteMetadata.languages.langs, typeof window !== `undefined` ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname):null, typeof window !== `undefined` ? getUrlForLang(`/${typeof window !== `undefined` ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname):null}/`, pathname):null):null} />
               </div>
-              {pathname === `/${getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)}/store` 
-              && <div><LitteCart/><br/><br/></div>}
+              {(pathname.indexOf('/products') >= 0 || pathname.indexOf('/store') >= 0 || cartQuantity > 0) && 
+              <div>
+                <LitteCart/>
+                <br/>
+                <br/>
+              </div>}
               <div className="sidebar__copyright">
                 {data.homeEs.copyright}
               </div>
@@ -172,6 +179,7 @@ const TemplateWrapper = ({ children }) => {
               <div className="mobile-header">
                 <div className="mobile-header__menu">
                   <button
+                    aria-label="Menu Button"
                     onClick={e => {
                       e.preventDefault();
                       setShowMenu(!showMenu);

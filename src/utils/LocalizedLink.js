@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { Link } from 'gatsby'
-import { injectIntl, intlShape } from 'react-intl'
+import { injectIntl } from 'react-intl'
 
 import locales from './locales'
 

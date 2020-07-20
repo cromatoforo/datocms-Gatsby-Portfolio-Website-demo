@@ -11,8 +11,8 @@ const SelectLanguage = (props) => {
 
   const links = props.langs ? props.langs.map(lang =>
       
-      <li selected={lang.selected} className={lang.selected && 'is-active'}>
-        <Link to={lang.link} key={lang.langKey} onClick={()=>changeLanguage(lang.langKey)}>
+      <li key={lang.langKey} selected={lang.selected} className={lang.selected ? 'is-active' : null}>
+        <Link to={lang.link} onClick={()=>changeLanguage(lang.langKey)}>
           {lang.langKey === 'es' ? 'Español' : 'English'}
         </Link>
       </li>

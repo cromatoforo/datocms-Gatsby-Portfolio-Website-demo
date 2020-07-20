@@ -7,4 +7,5 @@ module.exports = {
   'itemsInCart': 'Cosas en carro',
   'cartTotal': 'Total de carro',
   'viewCart': 'Ver carro',
+  'addCart': 'Añadir al carro',
 };

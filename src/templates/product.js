@@ -4,6 +4,8 @@ import { HelmetDatoCms } from 'gatsby-source-datocms'
 import Img from 'gatsby-image'
 import { graphql } from 'gatsby'
 import Layout from "../components/layout"
+import { FormattedMessage } from 'react-intl';
+import { Button } from 'evergreen-ui'
 
 export default ({ data }) => (
   <Layout>
@@ -19,6 +21,21 @@ export default ({ data }) => (
             ))}
           </Slider>
         </div>
+        <h1 className="sheet__price">USD {data.datoCmsProduct.price}</h1>
+        <div className="sheet__body"> 
+          <Button
+              className="snipcart-add-item"
+              data-item-id={data.datoCmsProduct.id}
+              data-item-price={data.datoCmsProduct.price}
+              data-item-url={data.datoCmsProduct.slug}
+              data-item-description={data.datoCmsProduct.excerpt}
+              data-item-image={data.datoCmsProduct.cardPhoto.url}
+              data-item-name={data.datoCmsProduct.name}
+              data-item-quantity="1"
+          >
+            <FormattedMessage id="addCart" /> 
+          </Button>
+        </div>       
         <div
           className="sheet__body"
           dangerouslySetInnerHTML={{
@@ -46,7 +63,10 @@ export const query = graphql`
         ...GatsbyDatoCmsSeoMetaTags
       }
       name
+      id
       excerpt
+      price
+      slug
       gallery {
         fluid(maxWidth: 200, imgixParams: { fm: "jpg", auto: "compress" }) {
           src

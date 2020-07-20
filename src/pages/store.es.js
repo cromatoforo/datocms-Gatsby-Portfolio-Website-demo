@@ -1,10 +1,9 @@
 import React from 'react'
-import { Link, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 import Masonry from 'react-masonry-component'
 import Img from 'gatsby-image'
 import Layout from "../components/layout"
 import LocalizedLink from '../utils/LocalizedLink';
-import { Button } from 'evergreen-ui'
 
 const ProductPage = ({ data }) => (
   <Layout>
@@ -22,19 +21,8 @@ const ProductPage = ({ data }) => (
               <div className="card__description">
                 <p>{product.excerpt}</p>
               </div>
-              <div className="card__button">
-                <Button
-                    className="snipcart-add-item"
-                    data-item-id={product.id}
-                    data-item-price={product.price}
-                    data-item-url={product.slug}
-                    data-item-description={product.excerpt}
-                    data-item-image={product.coverImage.url}
-                    data-item-name={product.name}
-                    data-item-quantity="1"
-                >
-                  Añadir al carro
-                </Button>
+              <div className="card__price">
+                <p>USD {product.price}</p>
               </div>
             </figcaption>
           </figure>
