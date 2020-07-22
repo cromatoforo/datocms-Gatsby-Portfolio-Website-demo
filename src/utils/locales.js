@@ -1,4 +1,4 @@
-module.exports={
+module.exports = {
     en: {
         path: 'en',
         locale: 'EN',
@@ -6,5 +6,5 @@ module.exports={
     es: {
         path: 'es',
         locale: 'ES',
-    }
+    },
 }

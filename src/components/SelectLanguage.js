@@ -1,42 +1,38 @@
-import React, { useContext } from "react";
-import PropTypes from 'prop-types';
-import Link from 'gatsby-link';
-import { FormattedMessage } from 'react-intl';
-import "../styles/index.sass";
-import {SnipcartContext} from 'gatsby-plugin-snipcart-advanced/context';
+import React, { useContext } from 'react'
+import PropTypes from 'prop-types'
+import Link from 'gatsby-link'
+import { FormattedMessage } from 'react-intl'
+import '../styles/index.sass'
+import { SnipcartContext } from 'gatsby-plugin-snipcart-advanced/context'
 
-const SelectLanguage = (props) => {
+const SelectLanguage = props => {
+    const { changeLanguage } = useContext(SnipcartContext)
 
-  const {changeLanguage} = useContext(SnipcartContext)
+    const links = props.langs
+        ? props.langs.map(lang => (
+              <li key={lang.langKey} selected={lang.selected} className={lang.selected ? 'is-active' : null}>
+                  <Link to={lang.link} onClick={() => changeLanguage(lang.langKey)}>
+                      {lang.langKey === 'es' ? 'Español' : 'English'}
+                  </Link>
+              </li>
+          ))
+        : null
 
-  const links = props.langs ? props.langs.map(lang =>
-      
-      <li key={lang.langKey} selected={lang.selected} className={lang.selected ? 'is-active' : null}>
-        <Link to={lang.link} onClick={()=>changeLanguage(lang.langKey)}>
-          {lang.langKey === 'es' ? 'Español' : 'English'}
-        </Link>
-      </li>
-  ): null;
-
-  return (
-    <section>
-      <header style={{
-        
-      }}>
-        <FormattedMessage id="selectLanguage" />
-      </header>
-      <ul className="sidebar__menu">
-        {links}
-      </ul>
-    </section>
-  );
-};
+    return (
+        <section>
+            <header style={{}}>
+                <FormattedMessage id='selectLanguage' />
+            </header>
+            <ul className='sidebar__menu'>{links}</ul>
+        </section>
+    )
+}
 
 SelectLanguage.propTypes = {
-  langs: PropTypes.array
-};
+    langs: PropTypes.array,
+}
 
-export default SelectLanguage;
+export default SelectLanguage
 
 // <li>
 // <LocalizedLink to="/store"><FormattedMessage id="store" /></LocalizedLink>
