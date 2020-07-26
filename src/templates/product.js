@@ -21,11 +21,12 @@ export default ({ data }) => (
                         ))}
                     </Slider>
                 </div>
+                <h1 className='sheet__price'>ID {data.datoCmsProduct.id.substring(0, data.datoCmsProduct.id.length - 3)}</h1>
                 <h1 className='sheet__price'>USD {data.datoCmsProduct.price}</h1>
                 <div className='sheet__body'>
                     <Button
                         className='snipcart-add-item'
-                        data-item-id={data.datoCmsProduct.id}
+                        data-item-id={data.datoCmsProduct.id.substring(0, data.datoCmsProduct.id.length - 3)}
                         data-item-price={data.datoCmsProduct.price}
                         data-item-url={data.datoCmsProduct.slug}
                         data-item-description={data.datoCmsProduct.excerpt}

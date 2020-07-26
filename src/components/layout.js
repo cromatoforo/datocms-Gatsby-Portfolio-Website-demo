@@ -77,7 +77,7 @@ const RenderLogo = props => {
 
 const TemplateWrapper = ({ children }) => {
     const [showMenu, setShowMenu] = useState(false)
-    const pathname = typeof window !== `undefined` ? window.location.pathname : null
+    const pathname = typeof window !== `undefined` ? window.location.pathname : ''
 
     const { state } = useContext(SnipcartContext)
     const { cartQuantity } = state
@@ -168,7 +168,12 @@ const TemplateWrapper = ({ children }) => {
                                 <ul className='sidebar__menu'>
                                     <li
                                         className={
-                                            pathname === `/${getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)}/`
+                                            pathname ===
+                                            `/${
+                                                typeof window !== `undefined`
+                                                    ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)
+                                                    : null
+                                            }/`
                                                 ? 'is-active'
                                                 : null
                                         }
@@ -189,7 +194,12 @@ const TemplateWrapper = ({ children }) => {
                                     </li>
                                     <li
                                         className={
-                                            pathname === `/${getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)}/about`
+                                            pathname ===
+                                            `/${
+                                                typeof window !== `undefined`
+                                                    ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)
+                                                    : null
+                                            }/about`
                                                 ? 'is-active'
                                                 : null
                                         }

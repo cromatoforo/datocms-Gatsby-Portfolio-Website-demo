@@ -9,7 +9,7 @@ const ProductPage = ({ data }) => (
     <Layout>
         <Masonry className='showcase'>
             {data.allDatoCmsProduct.edges.map(({ node: product }) => (
-                <div key={product.id} className='showcase__item'>
+                <div key={product.id.substring(0, product.id.length - 3)} className='showcase__item'>
                     <figure className='card'>
                         <LocalizedLink to={`/products/${product.slug}`} className='card__image'>
                             <Img fluid={product.coverImage.fluid} />
