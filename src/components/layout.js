@@ -152,9 +152,9 @@ const TemplateWrapper = ({ children }) => {
                             <HelmetDatoCms favicon={data.datoCmsSite.faviconMetaTags} seo={data.homeEn.seoMetaTags} />
                             <div className='container__sidebar'>
                                 <div className='sidebar'>
-                                    <Link to='/'>
+                                    <LocalizedLink to='/'>
                                         <RenderLogo color='#0f0' />
-                                    </Link>
+                                    </LocalizedLink>
 
                                     <div
                                         className='sidebar__intro'
@@ -265,9 +265,9 @@ const TemplateWrapper = ({ children }) => {
                                             />
                                         </div>
                                         <div className='mobile-header__logo'>
-                                            <Link to='/'>
+                                            <LocalizedLink to='/'>
                                                 <RenderLogo color='#0f0' />
-                                            </Link>
+                                            </LocalizedLink>
                                         </div>
                                     </div>
                                 </div>
