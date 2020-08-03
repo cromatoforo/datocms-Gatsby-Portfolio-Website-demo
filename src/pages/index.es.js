@@ -1,10 +1,9 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import Masonry from 'react-masonry-component'
 import Img from 'gatsby-image'
 import Layout from '../components/layout'
 import LocalizedLink from '../utils/LocalizedLink'
-import { Box, Flex, Heading, Button, Text, Card } from 'rebass'
+import { Box, Flex, Heading, Button, Text } from 'rebass'
 
 const IndexPage = ({ data }) => (
     <Layout>

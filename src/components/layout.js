@@ -2,7 +2,6 @@
 
 import React, { useState, useContext } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'gatsby'
 import { StaticQuery, graphql } from 'gatsby'
 import { HelmetDatoCms } from 'gatsby-source-datocms'
 import { getCurrentLangKey, getLangs, getUrlForLang } from 'ptz-i18n'
