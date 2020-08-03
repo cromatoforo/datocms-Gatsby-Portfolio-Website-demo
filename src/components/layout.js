@@ -11,6 +11,8 @@ import SelectLanguage from './SelectLanguage'
 import LocalizedLink from '../utils/LocalizedLink'
 import { SnipcartContext } from 'gatsby-plugin-snipcart-advanced/context'
 import { Button, Pane, Text } from 'evergreen-ui'
+import { ThemeProvider } from 'emotion-theming'
+import theme from '@rebass/preset'
 
 import '../styles/index.sass'
 
@@ -38,7 +40,7 @@ const LitteCart = () => {
     )
 }
 
-const RenderLogo = props => {
+const RenderLogo = (props) => {
     return (
         <svg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='146' height='48' viewBox='0 0 73 24'>
             <path
@@ -134,145 +136,146 @@ const TemplateWrapper = ({ children }) => {
                     }
                 }
             `}
-            render={data => (
-                <IntlProvider
-                    locale={typeof window !== `undefined` ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) : null}
-                    messages={
-                        typeof window !== `undefined`
-                            ? require(`../data/messages/${
-                                  typeof window !== `undefined` ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) : null
-                              }`)
-                            : null
-                    }
-                >
-                    <div className={`container ${showMenu ? 'is-open' : ''}`}>
-                        <HelmetDatoCms favicon={data.datoCmsSite.faviconMetaTags} seo={data.homeEn.seoMetaTags} />
-                        <div className='container__sidebar'>
-                            <div className='sidebar'>
-                                <h6 className='sidebar__title'>
+            render={(data) => (
+                <ThemeProvider theme={theme}>
+                    <IntlProvider
+                        locale={typeof window !== `undefined` ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) : null}
+                        messages={
+                            typeof window !== `undefined`
+                                ? require(`../data/messages/${
+                                      typeof window !== `undefined` ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) : null
+                                  }`)
+                                : null
+                        }
+                    >
+                        <div className={`container ${showMenu ? 'is-open' : ''}`}>
+                            <HelmetDatoCms favicon={data.datoCmsSite.faviconMetaTags} seo={data.homeEn.seoMetaTags} />
+                            <div className='container__sidebar'>
+                                <div className='sidebar'>
                                     <Link to='/'>
                                         <RenderLogo color='#0f0' />
                                     </Link>
-                                </h6>
-                                <div
-                                    className='sidebar__intro'
-                                    dangerouslySetInnerHTML={{
-                                        __html:
-                                            typeof window !== `undefined`
-                                                ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) === 'es'
-                                                    ? data.homeEs.introTextNode.childMarkdownRemark.html
-                                                    : data.homeEn.introTextNode.childMarkdownRemark.html
-                                                : null,
-                                    }}
-                                />
-                                <ul className='sidebar__menu'>
-                                    <li
-                                        className={
-                                            pathname ===
-                                            `/${
+
+                                    <div
+                                        className='sidebar__intro'
+                                        dangerouslySetInnerHTML={{
+                                            __html:
                                                 typeof window !== `undefined`
-                                                    ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)
-                                                    : null
-                                            }/`
-                                                ? 'is-active'
-                                                : null
-                                        }
-                                    >
-                                        <LocalizedLink to='/'>
-                                            <FormattedMessage id='home' />
-                                        </LocalizedLink>
-                                    </li>
-                                    <li className={pathname.indexOf('/projects') >= 0 ? 'is-active' : null}>
-                                        <LocalizedLink to='/projects'>
-                                            <FormattedMessage id='projects' />
-                                        </LocalizedLink>
-                                    </li>
-                                    <li className={pathname.indexOf('/products') >= 0 || pathname.indexOf('/store') >= 0 ? 'is-active' : null}>
-                                        <LocalizedLink to='/store'>
-                                            <FormattedMessage id='store' />
-                                        </LocalizedLink>
-                                    </li>
-                                    <li
-                                        className={
-                                            pathname ===
-                                            `/${
-                                                typeof window !== `undefined`
-                                                    ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)
-                                                    : null
-                                            }/about`
-                                                ? 'is-active'
-                                                : null
-                                        }
-                                    >
-                                        <LocalizedLink to='/about'>
-                                            <FormattedMessage id='about' />
-                                        </LocalizedLink>
-                                    </li>
-                                </ul>
-                                <p className='sidebar__social'>
-                                    {data.allDatoCmsSocialProfile.edges.map(({ node: profile }) => (
-                                        <a key={profile.profileType} href={profile.url} target='blank' className={`social social--${profile.profileType.toLowerCase()}`}>
-                                            {' '}
-                                        </a>
-                                    ))}
-                                </p>
-                                <div>
-                                    <SelectLanguage
-                                        langs={
-                                            typeof window !== `undefined`
-                                                ? getLangs(
-                                                      data.site.siteMetadata.languages.langs,
-                                                      typeof window !== `undefined`
-                                                          ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)
-                                                          : null,
-                                                      typeof window !== `undefined`
-                                                          ? getUrlForLang(
-                                                                `/${
-                                                                    typeof window !== `undefined`
-                                                                        ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)
-                                                                        : null
-                                                                }/`,
-                                                                pathname
-                                                            )
-                                                          : null
-                                                  )
-                                                : null
-                                        }
+                                                    ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) === 'es'
+                                                        ? data.homeEs.introTextNode.childMarkdownRemark.html
+                                                        : data.homeEn.introTextNode.childMarkdownRemark.html
+                                                    : null,
+                                        }}
                                     />
-                                </div>
-                                {(pathname.indexOf('/products') >= 0 || pathname.indexOf('/store') >= 0 || cartQuantity > 0) && (
+                                    <ul className='sidebar__menu'>
+                                        <li
+                                            className={
+                                                pathname ===
+                                                `/${
+                                                    typeof window !== `undefined`
+                                                        ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)
+                                                        : null
+                                                }/`
+                                                    ? 'is-active'
+                                                    : null
+                                            }
+                                        >
+                                            <LocalizedLink to='/'>
+                                                <FormattedMessage id='home' />
+                                            </LocalizedLink>
+                                        </li>
+                                        <li className={pathname.indexOf('/projects') >= 0 ? 'is-active' : null}>
+                                            <LocalizedLink to='/projects'>
+                                                <FormattedMessage id='projects' />
+                                            </LocalizedLink>
+                                        </li>
+                                        <li className={pathname.indexOf('/products') >= 0 || pathname.indexOf('/store') >= 0 ? 'is-active' : null}>
+                                            <LocalizedLink to='/store'>
+                                                <FormattedMessage id='store' />
+                                            </LocalizedLink>
+                                        </li>
+                                        <li
+                                            className={
+                                                pathname ===
+                                                `/${
+                                                    typeof window !== `undefined`
+                                                        ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)
+                                                        : null
+                                                }/about`
+                                                    ? 'is-active'
+                                                    : null
+                                            }
+                                        >
+                                            <LocalizedLink to='/about'>
+                                                <FormattedMessage id='about' />
+                                            </LocalizedLink>
+                                        </li>
+                                    </ul>
+                                    <p className='sidebar__social'>
+                                        {data.allDatoCmsSocialProfile.edges.map(({ node: profile }) => (
+                                            <a key={profile.profileType} href={profile.url} target='blank' className={`social social--${profile.profileType.toLowerCase()}`}>
+                                                {' '}
+                                            </a>
+                                        ))}
+                                    </p>
                                     <div>
-                                        <LitteCart />
-                                        <br />
-                                        <br />
-                                    </div>
-                                )}
-                                <div className='sidebar__copyright'>{data.homeEs.copyright}</div>
-                            </div>
-                        </div>
-                        <div className='container__body'>
-                            <div className='container__mobile-header'>
-                                <div className='mobile-header'>
-                                    <div className='mobile-header__menu'>
-                                        <button
-                                            aria-label='Menu Button'
-                                            onClick={e => {
-                                                e.preventDefault()
-                                                setShowMenu(!showMenu)
-                                            }}
+                                        <SelectLanguage
+                                            langs={
+                                                typeof window !== `undefined`
+                                                    ? getLangs(
+                                                          data.site.siteMetadata.languages.langs,
+                                                          typeof window !== `undefined`
+                                                              ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)
+                                                              : null,
+                                                          typeof window !== `undefined`
+                                                              ? getUrlForLang(
+                                                                    `/${
+                                                                        typeof window !== `undefined`
+                                                                            ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)
+                                                                            : null
+                                                                    }/`,
+                                                                    pathname
+                                                                )
+                                                              : null
+                                                      )
+                                                    : null
+                                            }
                                         />
                                     </div>
-                                    <div className='mobile-header__logo'>
-                                        <Link to='/'>
-                                            <RenderLogo color='#0f0' />
-                                        </Link>
-                                    </div>
+                                    {(pathname.indexOf('/products') >= 0 || pathname.indexOf('/store') >= 0 || cartQuantity > 0) && (
+                                        <div>
+                                            <LitteCart />
+                                            <br />
+                                            <br />
+                                        </div>
+                                    )}
+                                    <div className='sidebar__copyright'>{data.homeEs.copyright}</div>
                                 </div>
                             </div>
-                            {children}
+                            <div className='container__body'>
+                                <div className='container__mobile-header'>
+                                    <div className='mobile-header'>
+                                        <div className='mobile-header__menu'>
+                                            <button
+                                                aria-label='Menu Button'
+                                                onClick={(e) => {
+                                                    e.preventDefault()
+                                                    setShowMenu(!showMenu)
+                                                }}
+                                            />
+                                        </div>
+                                        <div className='mobile-header__logo'>
+                                            <Link to='/'>
+                                                <RenderLogo color='#0f0' />
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                                {children}
+                            </div>
                         </div>
-                    </div>
-                </IntlProvider>
+                    </IntlProvider>
+                </ThemeProvider>
             )}
         />
     )

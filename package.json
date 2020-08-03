@@ -4,7 +4,9 @@
   "version": "1.0.0",
   "author": "Stefano Verna <s.verna@datocms.com>",
   "dependencies": {
+    "@rebass/preset": "^4.0.5",
     "dotenv": "^8.1.0",
+    "emotion-theming": "^10.0.27",
     "evergreen-ui": "^4.28.1",
     "gatsby": "^2.22.10",
     "gatsby-image": "^2.2.34",
@@ -24,6 +26,7 @@
     "react-intl": "^5.0.2",
     "react-masonry-component": "^6.2.1",
     "react-slick": "^0.25.2",
+    "rebass": "^4.0.7",
     "slash": "^3.0.0",
     "slick-carousel": "^1.8.1",
     "typography": "^0.16.19",

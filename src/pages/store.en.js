@@ -19,6 +19,7 @@ const ProductPage = ({ data }) => (
                                 <LocalizedLink to={`/products/${product.slug}`}>{product.name}</LocalizedLink>
                             </h6>
                             <div className='card__description'>
+                                {product.id.substring(0, product.id.length - 3)}
                                 <p>{product.excerpt}</p>
                             </div>
                             <div className='card__price'>
