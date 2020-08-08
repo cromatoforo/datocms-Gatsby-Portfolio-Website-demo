@@ -10,7 +10,10 @@ const IndexPage = ({ data }) => (
         <Box>
             <LocalizedLink style={{ textDecoration: 'none' }} to={`/store`}>
                 <Flex px={2} py={2} flexDirection={['column-reverse', 'row']}>
-                    <Box sx={{ borderTopRightRadius: [0, 0], borderBottomRightRadius: [10, 0], borderTopLeftRadius: [0, 10], borderBottomLeftRadius: [10, 10] }} backgroundColor='#06939B'>
+                    <Box
+                        sx={{ flex: [1, 1 / 2], borderTopRightRadius: [0, 0], borderBottomRightRadius: [10, 0], borderTopLeftRadius: [0, 10], borderBottomLeftRadius: [10, 10] }}
+                        backgroundColor='#06939B'
+                    >
                         <Flex flexDirection='column'>
                             <Box color='#eee' p={15}>
                                 <Heading
@@ -37,7 +40,7 @@ const IndexPage = ({ data }) => (
                             </Box>
                         </Flex>
                     </Box>
-                    <Box>
+                    <Box sx={{ flex: [1, 1] }}>
                         <Img className='card__image' style={{ height: 220 }} objectFit='contain' alt={data.home.storeButton} fluid={data.home.storeImage.fluid} />
                     </Box>
                 </Flex>
@@ -61,7 +64,10 @@ const IndexPage = ({ data }) => (
                 {data.allDatoCmsWork.edges.map(({ node: work }) => (
                     <LocalizedLink key={work.id} style={{ textDecoration: 'none' }} to={`/projects/${work.slug}`}>
                         <Flex px={2} py={2} flexDirection={['column-reverse', 'row']}>
-                            <Box sx={{ borderTopRightRadius: [0, 0], borderBottomRightRadius: [10, 0], borderTopLeftRadius: [0, 10], borderBottomLeftRadius: [10, 10] }} backgroundColor='#40436A'>
+                            <Box
+                                sx={{ flex: [1, 1 / 2], borderTopRightRadius: [0, 0], borderBottomRightRadius: [10, 0], borderTopLeftRadius: [0, 10], borderBottomLeftRadius: [10, 10] }}
+                                backgroundColor='#40436A'
+                            >
                                 <Flex flexDirection='column'>
                                     <Box my={1} mb={3} color='#eee' p={15}>
                                         <Heading fontSize={[2, 3]}>{work.title}</Heading>
@@ -71,7 +77,7 @@ const IndexPage = ({ data }) => (
                                     </Box>
                                 </Flex>
                             </Box>
-                            <Box>
+                            <Box sx={{ flex: [1, 1] }}>
                                 <Img className='card__image' style={{ height: 220 }} objectFit='contain' alt={work.title} fluid={work.coverImage.fluid} />
                             </Box>
                         </Flex>
