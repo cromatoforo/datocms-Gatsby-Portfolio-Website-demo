@@ -1,0 +1,92 @@
+{
+    "Main": {
+        "title": {
+            "type": "StructuredText",
+            "config": {
+                "single": "heading1",
+                "label": "Title"
+            }
+        },
+        "subtitle": {
+            "type": "StructuredText",
+            "config": {
+                "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+                "label": "subtitle",
+                "placeholder": "detalles generales del proyecto"
+            }
+        },
+        "uid": {
+            "type": "UID",
+            "config": {
+                "label": "SLUG"
+            }
+        },
+        "image1": {
+            "type": "Image",
+            "config": {
+                "constraint": {
+                    "width": 1600,
+                    "height": 1200
+                },
+                "thumbnails": [],
+                "label": "image1"
+            }
+        },
+        "image2": {
+            "type": "Image",
+            "config": {
+                "constraint": {},
+                "thumbnails": [],
+                "label": "image2"
+            }
+        },
+        "image3": {
+            "type": "Image",
+            "config": {
+                "constraint": {},
+                "thumbnails": [],
+                "label": "image3"
+            }
+        },
+        "image4": {
+            "type": "Image",
+            "config": {
+                "constraint": {},
+                "thumbnails": [],
+                "label": "image4"
+            }
+        },
+        "image5": {
+            "type": "Image",
+            "config": {
+                "constraint": {},
+                "thumbnails": [],
+                "label": "image5"
+            }
+        },
+        "image6": {
+            "type": "Image",
+            "config": {
+                "constraint": {},
+                "thumbnails": [],
+                "label": "image6"
+            }
+        },
+        "description": {
+            "type": "StructuredText",
+            "config": {
+                "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                "label": "description",
+                "placeholder": "Descripción de proyectos geniales por Lazum."
+            }
+        },
+        "copyright": {
+            "type": "StructuredText",
+            "config": {
+                "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+                "label": "copyright",
+                "placeholder": "© 2020 Lazum"
+            }
+        }
+    }
+}

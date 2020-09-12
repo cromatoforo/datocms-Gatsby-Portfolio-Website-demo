@@ -21,7 +21,7 @@ const IndexPage = ({ data }) => (
                                     p={1}
                                     as='h3'
                                     dangerouslySetInnerHTML={{
-                                        __html: data.home.storeTaglineNode.childMarkdownRemark.html,
+                                        __html: data.homepage.data.store_tagline.html,
                                     }}
                                 />
                                 <Button
@@ -34,14 +34,15 @@ const IndexPage = ({ data }) => (
                                         color: '#40436A',
                                         backgroundColor: '#FCB515',
                                     }}
-                                >
-                                    {data.home.storeButton}
-                                </Button>
+                                    dangerouslySetInnerHTML={{
+                                        __html: data.homepage.data.store_button.html,
+                                    }}
+                                />
                             </Box>
                         </Flex>
                     </Box>
                     <Box sx={{ flex: [1, 1] }}>
-                        <Img className='card__image' style={{ height: 220 }} objectFit='contain' alt={data.home.storeButton} fluid={data.home.storeImage.fluid} />
+                        <Img className='card__image' style={{ height: 220 }} objectFit='contain' fluid={data.homepage.data.store_image.fluid} />
                     </Box>
                 </Flex>
             </LocalizedLink>
@@ -50,40 +51,38 @@ const IndexPage = ({ data }) => (
                     <Text
                         fontSize={3}
                         dangerouslySetInnerHTML={{
-                            __html: data.home.homeTaglineNode.childMarkdownRemark.html,
+                            __html: data.homepage.data.home_tagline.html,
                         }}
                     />
                 </Box>
             </Box>
             <Box>
                 <Box color='#06939B' p={12} py={0}>
-                    <Heading>{data.home.homeProjects}</Heading>
+                    <Heading dangerouslySetInnerHTML={{ __html: data.homepage.data.home_projects.html }} />
                 </Box>
             </Box>
-            <Box>
-                {data.allDatoCmsWork.edges.map(({ node: work }) => (
-                    <LocalizedLink key={work.id} style={{ textDecoration: 'none' }} to={`/projects/${work.slug}`}>
-                        <Flex px={2} py={2} flexDirection={['column-reverse', 'row']}>
-                            <Box
-                                sx={{ flex: [1, 1 / 2], borderTopRightRadius: [0, 0], borderBottomRightRadius: [10, 0], borderTopLeftRadius: [0, 10], borderBottomLeftRadius: [10, 10] }}
-                                backgroundColor='#40436A'
-                            >
-                                <Flex flexDirection='column'>
-                                    <Box my={1} mb={3} color='#eee' p={15}>
-                                        <Heading fontSize={[2, 3]}>{work.title}</Heading>
-                                        <Text mt={[0, 20]} fontSize={[1, 2]}>
-                                            {work.excerpt}
-                                        </Text>
-                                    </Box>
-                                </Flex>
-                            </Box>
-                            <Box sx={{ flex: [1, 1] }}>
-                                <Img className='card__image' style={{ height: 220 }} objectFit='contain' alt={work.title} fluid={work.coverImage.fluid} />
-                            </Box>
-                        </Flex>
-                    </LocalizedLink>
-                ))}
-            </Box>
+            {data.projects.edges.map(({ node: project }) => (
+                <LocalizedLink key={project.uid} style={{ textDecoration: 'none' }} to={`/projects/${project.uid}`}>
+                    <Flex px={2} py={2} flexDirection={['column-reverse', 'row']}>
+                        <Box
+                            sx={{ flex: [1, 1 / 2], borderTopRightRadius: [0, 0], borderBottomRightRadius: [10, 0], borderTopLeftRadius: [0, 10], borderBottomLeftRadius: [10, 10] }}
+                            backgroundColor='#40436A'
+                        >
+                            <Flex flexDirection='column'>
+                                <Box my={1} mb={3} color='#eee' p={15}>
+                                    <Heading fontSize={[2, 3]}>{project.data.title.text}</Heading>
+                                    <Text mt={[0, 20]} fontSize={[1, 2]}>
+                                        {project.data.title.text}
+                                    </Text>
+                                </Box>
+                            </Flex>
+                        </Box>
+                        <Box sx={{ flex: [1, 1] }}>
+                            <Img className='card__image' style={{ height: 220 }} objectFit='contain' alt={project.data.title.text} fluid={project.data.image1.fluid} />
+                        </Box>
+                    </Flex>
+                </LocalizedLink>
+            ))}
         </Box>
     </Layout>
 )
@@ -92,44 +91,42 @@ export default IndexPage
 
 export const query = graphql`
     query IndexQueryEn {
-        home: datoCmsHome(locale: { eq: "en" }) {
-            seoMetaTags {
-                ...GatsbyDatoCmsSeoMetaTags
-            }
-            introTextNode {
-                childMarkdownRemark {
+        homepage: prismicHome(lang: { eq: "en-us" }) {
+            data {
+                store_tagline {
                     html
                 }
-            }
-            storeTaglineNode {
-                childMarkdownRemark {
+                store_button {
                     html
                 }
-            }
-            homeTaglineNode {
-                childMarkdownRemark {
+                home_tagline {
                     html
                 }
-            }
-            storeButton
-            homeProjects
-            copyright
-            storeImage {
-                fluid(maxWidth: 450, imgixParams: { fm: "jpg", auto: "compress" }) {
-                    ...GatsbyDatoCmsSizes
+                home_projects {
+                    html
+                }
+                copyright {
+                    text
+                }
+                store_image {
+                    fluid(maxWidth: 1000, maxHeight: 800) {
+                        ...GatsbyPrismicImageFluid
+                    }
                 }
             }
         }
-        allDatoCmsWork(filter: { locale: { eq: "en" } }, sort: { fields: [position], order: ASC }) {
+        projects: allPrismicProject(limit: 3, filter: { lang: { eq: "en-us" } }) {
             edges {
                 node {
-                    id
-                    title
-                    slug
-                    excerpt
-                    coverImage {
-                        fluid(maxWidth: 450, imgixParams: { fm: "jpg", auto: "compress" }) {
-                            ...GatsbyDatoCmsSizes
+                    uid
+                    data {
+                        title {
+                            text
+                        }
+                        image1 {
+                            fluid(maxWidth: 1000, maxHeight: 800) {
+                                ...GatsbyPrismicImageFluid
+                            }
                         }
                     }
                 }
@@ -137,3 +134,48 @@ export const query = graphql`
         }
     }
 `
+
+// <Box sx={{ flex: [1, 1] }}>
+// <Img className='card__image' style={{ height: 220 }} objectFit='contain' alt={data.home.storeButton} fluid={data.home.storeImage.fluid} />
+// </Box>
+
+// allDatoCmsWork(filter: { locale: { eq: "en" } }, sort: { fields: [position], order: ASC }) {
+//     edges {
+//         node {
+//             id
+//             title
+//             slug
+//             excerpt
+//             coverImage {
+//                 fluid(maxWidth: 450, imgixParams: { fm: "jpg", auto: "compress" }) {
+//                     ...GatsbyDatoCmsSizes
+//                 }
+//             }
+//         }
+//     }
+// }
+
+// <Box>
+// {data.allDatoCmsWork.edges.map(({ node: work }) => (
+//     <LocalizedLink key={work.id} style={{ textDecoration: 'none' }} to={`/projects/${work.slug}`}>
+//         <Flex px={2} py={2} flexDirection={['column-reverse', 'row']}>
+//             <Box
+//                 sx={{ flex: [1, 1 / 2], borderTopRightRadius: [0, 0], borderBottomRightRadius: [10, 0], borderTopLeftRadius: [0, 10], borderBottomLeftRadius: [10, 10] }}
+//                 backgroundColor='#40436A'
+//             >
+//                 <Flex flexDirection='column'>
+//                     <Box my={1} mb={3} color='#eee' p={15}>
+//                         <Heading fontSize={[2, 3]}>{work.title}</Heading>
+//                         <Text mt={[0, 20]} fontSize={[1, 2]}>
+//                             {work.excerpt}
+//                         </Text>
+//                     </Box>
+//                 </Flex>
+//             </Box>
+//             <Box sx={{ flex: [1, 1] }}>
+//                 <Img className='card__image' style={{ height: 220 }} objectFit='contain' alt={work.title} fluid={work.coverImage.fluid} />
+//             </Box>
+//         </Flex>
+//     </LocalizedLink>
+// ))}
+// </Box>
