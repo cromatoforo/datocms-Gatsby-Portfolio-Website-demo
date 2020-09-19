@@ -15,10 +15,10 @@ export default ({ data }) => (
 
                 <div className='sheet__slider'>
                     <Slider infinite={true} dots={true} slidesToShow={1} arrows={true} speed={500}>
-                        <img alt={'Gallery Image 1'} key={'img1'} src={data.prismicProducts.data.image1.fluid.src} />
-                        <img alt={'Gallery Image 2'} key={'img2'} src={data.prismicProducts.data.image2.fluid.src} />
-                        <img alt={'Gallery Image 3'} key={'img3'} src={data.prismicProducts.data.image3.fluid.src} />
-                        <img alt={'Gallery Image 4'} key={'img4'} src={data.prismicProducts.data.image4.fluid.src} />
+                        <Img key={'img1'} fluid={data.prismicProducts.data.image1.fluid} />
+                        <Img key={'img2'} fluid={data.prismicProducts.data.image2.fluid} />
+                        <Img key={'img3'} fluid={data.prismicProducts.data.image3.fluid} />
+                        <Img key={'img4'} fluid={data.prismicProducts.data.image4.fluid} />
                     </Slider>
                 </div>
 

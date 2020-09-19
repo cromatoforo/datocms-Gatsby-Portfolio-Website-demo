@@ -30,6 +30,7 @@ module.exports = {
                     project: require('./src/schemas/project.json'),
                     products: require('./src/schemas/products.json'),
                     products_home: require('./src/schemas/products_home.json'),
+                    about: require('./src/schemas/about.json'),
                 },
                 // Get the correct URLs in blog posts
                 // linkResolver: () => prismicLinkResolver,

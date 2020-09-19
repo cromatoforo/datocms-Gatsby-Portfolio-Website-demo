@@ -4,86 +4,113 @@ import Img from 'gatsby-image'
 import Masonry from 'react-masonry-component'
 import Layout from '../components/layout'
 import LocalizedLink from '../utils/LocalizedLink'
-import { Box, Text } from 'rebass'
+import { Box, Flex, Heading, Text } from 'rebass'
 import { Button } from 'evergreen-ui'
 import Slider from 'react-slick'
-
 const ProductsPage = ({ data }) => (
     <Layout>
-        <Box>
-            <Box>
-                <Box p={12} color='#40436A'>
-                    <Text
-                        fontSize={3}
-                        dangerouslySetInnerHTML={{
-                            __html: data.productspage.data.title.html,
-                        }}
-                    />
-                </Box>
-                <Box p={12} color='#40436A'>
-                    <Text
-                        fontSize={3}
-                        dangerouslySetInnerHTML={{
-                            __html: data.productspage.data.sub_title.html,
-                        }}
-                    />
-                </Box>
+        <article className='sheet'>
+            <div className='sheet__inner'>
+                <Box>
+                    <Box>
+                        <Box p={12} color='#40436A'>
+                            <Text
+                                fontSize={3}
+                                dangerouslySetInnerHTML={{
+                                    __html: data.productspage.data.title.html,
+                                }}
+                            />
+                        </Box>
+                        <Box p={12} color='#40436A'>
+                            <Text
+                                fontSize={3}
+                                dangerouslySetInnerHTML={{
+                                    __html: data.productspage.data.sub_title.html,
+                                }}
+                            />
+                        </Box>
 
-                <Box p={12} color='#40436A'>
-                    <div className='sheet__slider'>
-                        <Slider infinite={true} dots={true} slidesToShow={1} arrows={true} speed={500}>
-                            <img key={'img1'} src={data.productspage.data.image1.fluid.src} />
-                        </Slider>
-                    </div>
-                </Box>
+                        <Box p={12} color='#40436A'>
+                            <div className='sheet__slider'>
+                                <Slider infinite={true} autoplay={true} dots={true} slidesToShow={1} arrows={true} speed={500}>
+                                    <figure>
+                                        <Img fluid={data.productspage.data.image1.fluid} />
+                                        <figcaption>
+                                            <h6 className='card__title'>{data.productspage.data.caption1.text}</h6>
+                                        </figcaption>
+                                    </figure>
+                                    <figure>
+                                        <Img fluid={data.productspage.data.image2.fluid} />
+                                        <figcaption>
+                                            <h6 className='card__title'>{data.productspage.data.caption2.text}</h6>
+                                        </figcaption>
+                                    </figure>
+                                    <figure>
+                                        <Img fluid={data.productspage.data.image3.fluid} />
+                                        <figcaption>
+                                            <h6 className='card__title'>{data.productspage.data.caption3.text}</h6>
+                                        </figcaption>
+                                    </figure>
+                                </Slider>
+                            </div>
+                        </Box>
 
-                <Box p={12} color='#40436A'>
-                    <Text
-                        fontSize={3}
-                        dangerouslySetInnerHTML={{
-                            __html: data.productspage.data.about_lazum_store.html,
-                        }}
-                    />
+                        <Box p={12} color='#40436A'>
+                            <Text
+                                fontSize={3}
+                                dangerouslySetInnerHTML={{
+                                    __html: data.productspage.data.about_lazum_store.html,
+                                }}
+                            />
+                        </Box>
+                    </Box>
+                    <Box>
+                        <Masonry className='showcase'>
+                            {data.products.edges.map(({ node: product }) => (
+                                <div key={product.uid} className='showcase__item'>
+                                    <figure className='card'>
+                                        <LocalizedLink to={`/products/${product.uid}`} className='card__image'>
+                                            <Img fluid={product.data.image1.fluid} />
+                                        </LocalizedLink>
+                                        <figcaption className='card__caption'>
+                                            <h6 className='card__title'>
+                                                <LocalizedLink to={`/products/${product.uid}`}>{product.data.title.text}</LocalizedLink>
+                                            </h6>
+                                            <div
+                                                className='card__description'
+                                                dangerouslySetInnerHTML={{
+                                                    __html: product.data.subtitle.text,
+                                                }}
+                                            ></div>
+                                            <div
+                                                style={{ paddingTop: 10 }}
+                                                className='card__title'
+                                                dangerouslySetInnerHTML={{
+                                                    __html: '$' + product.data.price,
+                                                }}
+                                            ></div>
+                                            <Button
+                                                marginTop={5}
+                                                className='snipcart-add-item'
+                                                data-item-id={product.uid}
+                                                data-item-price={product.data.price}
+                                                data-item-url={product.uid}
+                                                data-item-description={product.data.subtitle.text}
+                                                data-item-image={product.data.image1.url}
+                                                data-item-name={product.data.title.text}
+                                                data-item-quantity='1'
+                                            >
+                                                {'Add to Cart'}
+                                            </Button>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                            ))}
+                        </Masonry>
+                    </Box>
                 </Box>
-            </Box>
-            <Box>
-                <Masonry className='showcase'>
-                    {data.products.edges.map(({ node: product }) => (
-                        <div key={product.uid} className='showcase__item'>
-                            <figure className='card'>
-                                <LocalizedLink to={`/products/${product.uid}`} className='card__image'>
-                                    <Img fluid={product.data.image1.fluid} />
-                                </LocalizedLink>
-                                <figcaption className='card__caption'>
-                                    <h6 className='card__title'>
-                                        <LocalizedLink to={`/products/${product.uid}`}>{product.data.title.text}</LocalizedLink>
-                                    </h6>
-                                    <div
-                                        className='card__description'
-                                        dangerouslySetInnerHTML={{
-                                            __html: product.data.subtitle.text,
-                                        }}
-                                    ></div>
-                                    <Button
-                                        marginTop={10}
-                                        className='snipcart-add-item'
-                                        data-item-id={product.uid}
-                                        data-item-price={product.data.price}
-                                        data-item-url={product.uid}
-                                        data-item-description={product.data.subtitle.text}
-                                        data-item-image={product.data.image1.url}
-                                        data-item-name={product.data.title.text}
-                                        data-item-quantity='1'
-                                    >
-                                        {'Anadir al carro'}
-                                    </Button>
-                                </figcaption>
-                            </figure>
-                        </div>
-                    ))}
-                </Masonry>
-            </Box>
-        </Box>
+            </div>
+        </article>
     </Layout>
 )
 
@@ -120,6 +147,12 @@ export const query = graphql`
                     }
                 }
                 caption1 {
+                    text
+                }
+                caption2 {
+                    text
+                }
+                caption3 {
                     text
                 }
             }
