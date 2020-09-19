@@ -11,13 +11,6 @@ module.exports = {
         `gatsby-plugin-sass`,
         'gatsby-transformer-sharp',
         'gatsby-plugin-sharp',
-        {
-            resolve: `gatsby-source-filesystem`,
-            options: {
-                name: `images`,
-                path: `${__dirname}/src/images`,
-            },
-        },
         `gatsby-transformer-remark`,
         {
             resolve: 'gatsby-plugin-i18n',
