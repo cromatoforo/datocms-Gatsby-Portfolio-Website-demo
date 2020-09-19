@@ -16,12 +16,21 @@ exports.createPages = ({ graphql, actions }) => {
                         }
                     }
                 }
+                products: allPrismicProducts {
+                    edges {
+                        node {
+                            id
+                            uid
+                            lang
+                        }
+                    }
+                }
             }
         `).then((result) => {
             //
 
             const projectsList = result.data.projects.edges
-            //const productsList = result.data.products.edges
+            const productsList = result.data.products.edges
 
             projectsList.map(({ node: project }) => {
                 createPage({
@@ -44,6 +53,29 @@ exports.createPages = ({ graphql, actions }) => {
                     },
                 })
             })
+
+            productsList.map(({ node: product }) => {
+                createPage({
+                    path: `en/products/${product.uid}`,
+                    component: path.resolve(`./src/templates/product.js`),
+                    context: {
+                        slug: product.uid,
+                        lang: 'en-us',
+                    },
+                })
+            })
+            //
+            productsList.map(({ node: product }) => {
+                createPage({
+                    path: `es/products/${product.uid}`,
+                    component: path.resolve(`./src/templates/product.js`),
+                    context: {
+                        slug: product.uid,
+                        lang: 'es-pr',
+                    },
+                })
+            })
+
             //
             //
             // result.data.works.edges.map(({ node: work }) => {

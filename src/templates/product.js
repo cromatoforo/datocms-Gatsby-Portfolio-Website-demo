@@ -1,92 +1,89 @@
 import React from 'react'
 import Slider from 'react-slick'
-import { HelmetDatoCms } from 'gatsby-source-datocms'
+// import { HelmetDatoCms } from 'gatsby-source-datocms'
 import Img from 'gatsby-image'
 import { graphql } from 'gatsby'
 import Layout from '../components/layout'
-import { FormattedMessage } from 'react-intl'
 import { Button } from 'evergreen-ui'
 
 export default ({ data }) => (
     <Layout>
         <article className='sheet'>
-            <HelmetDatoCms seo={data.datoCmsProduct.seoMetaTags} />
             <div className='sheet__inner'>
-                <h1 className='sheet__title'>{data.datoCmsProduct.name}</h1>
-                <br />
+                <h1 className='sheet__title'>{data.prismicProducts.data.title.text}</h1>
+                <p className='sheet__lead'>{data.prismicProducts.data.subtitle.text}</p>
+
                 <div className='sheet__slider'>
                     <Slider infinite={true} dots={true} slidesToShow={1} arrows={true} speed={500}>
-                        {data.datoCmsProduct.gallery.map(({ fluid }) => (
-                            <img alt={data.datoCmsProduct.name} key={fluid.src} src={fluid.src} />
-                        ))}
+                        <img alt={'Gallery Image 1'} key={'img1'} src={data.prismicProducts.data.image1.fluid.src} />
+                        <img alt={'Gallery Image 2'} key={'img2'} src={data.prismicProducts.data.image2.fluid.src} />
+                        <img alt={'Gallery Image 3'} key={'img3'} src={data.prismicProducts.data.image3.fluid.src} />
+                        <img alt={'Gallery Image 4'} key={'img4'} src={data.prismicProducts.data.image4.fluid.src} />
                     </Slider>
                 </div>
-                <h1 className='sheet__price'>ID {data.datoCmsProduct.id.substring(0, data.datoCmsProduct.id.length - 3)}</h1>
-                <h1 className='sheet__price'>USD {data.datoCmsProduct.price}</h1>
+
+                <h1 className='sheet__price'>ID {data.prismicProducts.uid}</h1>
+                <h1 className='sheet__price'>USD {data.prismicProducts.data.price}</h1>
                 <div className='sheet__body'>
                     <Button
                         className='snipcart-add-item'
-                        data-item-id={data.datoCmsProduct.id.substring(0, data.datoCmsProduct.id.length - 3)}
-                        data-item-price={data.datoCmsProduct.price}
-                        data-item-url={data.datoCmsProduct.slug}
-                        data-item-description={data.datoCmsProduct.excerpt}
-                        data-item-image={data.datoCmsProduct.cardPhoto.url}
-                        data-item-name={data.datoCmsProduct.name}
+                        data-item-id={data.prismicProducts.uid}
+                        data-item-price={data.prismicProducts.data.price}
+                        data-item-url={data.prismicProducts.uid}
+                        data-item-description={data.prismicProducts.data.subtitle.text}
+                        data-item-image={data.prismicProducts.data.image1.url}
+                        data-item-name={data.prismicProducts.data.title.text}
                         data-item-quantity='1'
                     >
-                        <FormattedMessage id='addCart' />
+                        Add to Cart
                     </Button>
                 </div>
+
                 <div
                     className='sheet__body'
                     dangerouslySetInnerHTML={{
-                        __html: data.datoCmsProduct.materialsNode.childMarkdownRemark.html,
+                        __html: data.prismicProducts.data.description.html,
                     }}
                 />
-                <div
-                    className='sheet__body'
-                    dangerouslySetInnerHTML={{
-                        __html: data.datoCmsProduct.descriptionNode.childMarkdownRemark.html,
-                    }}
-                />
-                <div className='sheet__gallery'>
-                    <Img fluid={data.datoCmsProduct.cardPhoto.fluid} />
-                </div>
             </div>
         </article>
     </Layout>
 )
 
 export const query = graphql`
-    query ProductQuery($slug: String!, $locale: String!) {
-        datoCmsProduct(slug: { eq: $slug }, locale: { eq: $locale }) {
-            seoMetaTags {
-                ...GatsbyDatoCmsSeoMetaTags
-            }
-            name
-            id
-            excerpt
-            price
-            slug
-            gallery {
-                fluid(maxWidth: 200, imgixParams: { fm: "jpg", auto: "compress" }) {
-                    src
+    query ProductsQuery($slug: String!, $lang: String!) {
+        prismicProducts(uid: { eq: $slug }, lang: { eq: $lang }) {
+            uid
+            data {
+                price
+                title {
+                    text
                 }
-            }
-            materialsNode {
-                childMarkdownRemark {
+                subtitle {
+                    text
+                }
+                image1 {
+                    fluid(maxWidth: 1000, maxHeight: 800) {
+                        ...GatsbyPrismicImageFluid
+                    }
+                }
+                image2 {
+                    fluid(maxWidth: 1000, maxHeight: 800) {
+                        ...GatsbyPrismicImageFluid
+                    }
+                }
+                image3 {
+                    fluid(maxWidth: 1000, maxHeight: 800) {
+                        ...GatsbyPrismicImageFluid
+                    }
+                }
+                image4 {
+                    fluid(maxWidth: 1000, maxHeight: 800) {
+                        ...GatsbyPrismicImageFluid
+                    }
+                }
+                description {
                     html
-                }
-            }
-            descriptionNode {
-                childMarkdownRemark {
-                    html
-                }
-            }
-            cardPhoto {
-                url
-                fluid(maxWidth: 600, imgixParams: { fm: "jpg", auto: "compress" }) {
-                    ...GatsbyDatoCmsSizes
                 }
             }
         }

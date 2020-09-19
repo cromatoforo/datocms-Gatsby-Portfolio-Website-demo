@@ -1,0 +1,104 @@
+{
+    "Main": {
+        "title": {
+            "type": "StructuredText",
+            "config": {
+                "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+                "label": "title"
+            }
+        },
+        "uid": {
+            "type": "UID",
+            "config": {
+                "label": "slug"
+            }
+        },
+        "subtitle": {
+            "type": "StructuredText",
+            "config": {
+                "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+                "label": "subtitle",
+                "placeholder": "detalles generales del producto"
+            }
+        },
+        "description": {
+            "type": "StructuredText",
+            "config": {
+                "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                "label": "description",
+                "placeholder": "Descripción del producto"
+            }
+        },
+        "price": {
+            "type": "Number",
+            "config": {
+                "label": "price",
+                "placeholder": "$"
+            }
+        },
+        "image1": {
+            "type": "Image",
+            "config": {
+                "constraint": {},
+                "thumbnails": [],
+                "label": "image1"
+            }
+        },
+        "caption1": {
+            "type": "StructuredText",
+            "config": {
+                "single": "heading1",
+                "label": "caption1",
+                "placeholder": "caption image 1"
+            }
+        },
+        "image2": {
+            "type": "Image",
+            "config": {
+                "constraint": {},
+                "thumbnails": [],
+                "label": "image2"
+            }
+        },
+        "caption2": {
+            "type": "StructuredText",
+            "config": {
+                "single": "heading1",
+                "label": "caption2",
+                "placeholder": "caption image 2"
+            }
+        },
+        "image3": {
+            "type": "Image",
+            "config": {
+                "constraint": {},
+                "thumbnails": [],
+                "label": "image3"
+            }
+        },
+        "caption3": {
+            "type": "StructuredText",
+            "config": {
+                "single": "heading1",
+                "label": "caption3",
+                "placeholder": "caption image 3"
+            }
+        },
+        "image4": {
+            "type": "Image",
+            "config": {
+                "constraint": {},
+                "thumbnails": [],
+                "label": "image4"
+            }
+        },
+        "caption4": {
+            "type": "StructuredText",
+            "config": {
+                "single": "heading1",
+                "label": "caption4",
+                "placeholder": "caption image 4"
+            }
+        }
+    }
+}

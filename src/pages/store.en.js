@@ -1,54 +1,145 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import Masonry from 'react-masonry-component'
 import Img from 'gatsby-image'
+import Masonry from 'react-masonry-component'
 import Layout from '../components/layout'
 import LocalizedLink from '../utils/LocalizedLink'
-
-const ProductPage = ({ data }) => (
+import { Box, Flex, Heading, Text } from 'rebass'
+import { Button } from 'evergreen-ui'
+import Slider from 'react-slick'
+const ProductsPage = ({ data }) => (
     <Layout>
-        <Masonry className='showcase'>
-            {data.allDatoCmsProduct.edges.map(({ node: product }) => (
-                <div key={product.id.substring(0, product.id.length - 3)} className='showcase__item'>
-                    <figure className='card'>
-                        <LocalizedLink to={`/products/${product.slug}`} className='card__image'>
-                            <Img fluid={product.coverImage.fluid} />
-                        </LocalizedLink>
-                        <figcaption className='card__caption'>
-                            <h6 className='card__title'>
-                                <LocalizedLink to={`/products/${product.slug}`}>{product.name}</LocalizedLink>
-                            </h6>
-                            <div className='card__description'>
-                                {product.id.substring(0, product.id.length - 3)}
-                                <p>{product.excerpt}</p>
-                            </div>
-                            <div className='card__price'>
-                                <p>USD {product.price}</p>
-                            </div>
-                        </figcaption>
-                    </figure>
-                </div>
-            ))}
-        </Masonry>
+        <Box>
+            <Box>
+                <Box p={12} color='#40436A'>
+                    <Text
+                        fontSize={3}
+                        dangerouslySetInnerHTML={{
+                            __html: data.productspage.data.title.html,
+                        }}
+                    />
+                </Box>
+                <Box p={12} color='#40436A'>
+                    <Text
+                        fontSize={3}
+                        dangerouslySetInnerHTML={{
+                            __html: data.productspage.data.sub_title.html,
+                        }}
+                    />
+                </Box>
+
+                <Box p={12} color='#40436A'>
+                    <div className='sheet__slider'>
+                        <Slider infinite={true} dots={true} slidesToShow={1} arrows={true} speed={500}>
+                            <img key={'img1'} src={data.productspage.data.image1.fluid.src} />
+                        </Slider>
+                    </div>
+                </Box>
+
+                <Box p={12} color='#40436A'>
+                    <Text
+                        fontSize={3}
+                        dangerouslySetInnerHTML={{
+                            __html: data.productspage.data.about_lazum_store.html,
+                        }}
+                    />
+                </Box>
+            </Box>
+            <Box>
+                <Masonry className='showcase'>
+                    {data.products.edges.map(({ node: product }) => (
+                        <div key={product.uid} className='showcase__item'>
+                            <figure className='card'>
+                                <LocalizedLink to={`/products/${product.uid}`} className='card__image'>
+                                    <Img fluid={product.data.image1.fluid} />
+                                </LocalizedLink>
+                                <figcaption className='card__caption'>
+                                    <h6 className='card__title'>
+                                        <LocalizedLink to={`/products/${product.uid}`}>{product.data.title.text}</LocalizedLink>
+                                    </h6>
+                                    <div
+                                        className='card__description'
+                                        dangerouslySetInnerHTML={{
+                                            __html: product.data.subtitle.text,
+                                        }}
+                                    ></div>
+                                    <Button
+                                        marginTop={10}
+                                        className='snipcart-add-item'
+                                        data-item-id={product.uid}
+                                        data-item-price={product.data.price}
+                                        data-item-url={product.uid}
+                                        data-item-description={product.data.subtitle.text}
+                                        data-item-image={product.data.image1.url}
+                                        data-item-name={product.data.title.text}
+                                        data-item-quantity='1'
+                                    >
+                                        {'Add to Cart'}
+                                    </Button>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    ))}
+                </Masonry>
+            </Box>
+        </Box>
     </Layout>
 )
 
-export default ProductPage
+export default ProductsPage
 
 export const query = graphql`
-    query ProductQueryEn {
-        allDatoCmsProduct(filter: { locale: { eq: "en" } }) {
+    query ProductsQueryEn {
+        productspage: prismicProductsHome(lang: { eq: "en-us" }) {
+            data {
+                title {
+                    html
+                    text
+                }
+                sub_title {
+                    html
+                    text
+                }
+                about_lazum_store {
+                    html
+                }
+                image1 {
+                    fluid(maxWidth: 1000, maxHeight: 800) {
+                        ...GatsbyPrismicImageFluid
+                    }
+                }
+                image2 {
+                    fluid(maxWidth: 1000, maxHeight: 800) {
+                        ...GatsbyPrismicImageFluid
+                    }
+                }
+                image3 {
+                    fluid(maxWidth: 1000, maxHeight: 800) {
+                        ...GatsbyPrismicImageFluid
+                    }
+                }
+                caption1 {
+                    text
+                }
+            }
+        }
+        products: allPrismicProducts(filter: { lang: { eq: "en-us" } }) {
             edges {
                 node {
-                    id
-                    name
-                    slug
-                    price
-                    excerpt
-                    coverImage {
-                        url
-                        fluid(maxWidth: 450, imgixParams: { fm: "jpg", auto: "compress" }) {
-                            ...GatsbyDatoCmsSizes
+                    uid
+                    data {
+                        price
+                        title {
+                            text
+                        }
+                        subtitle {
+                            text
+                        }
+                        image1 {
+                            url
+                            fluid(maxWidth: 1000, maxHeight: 800) {
+                                ...GatsbyPrismicImageFluid
+                            }
                         }
                     }
                 }
@@ -59,3 +150,26 @@ export const query = graphql`
 
 // data-item-taxes={tva}
 //disabled={_stock === 0 ? true : false}
+
+// {data.products.edges.map(({ node: product }) => (
+//     <LocalizedLink key={product.uid} style={{ textDecoration: 'none' }} to={`/products/${product.uid}`}>
+//         <Flex px={2} py={2} flexDirection={['column-reverse', 'row']}>
+//             <Box
+//                 sx={{ flex: [1, 1 / 2], borderTopRightRadius: [0, 0], borderBottomRightRadius: [10, 0], borderTopLeftRadius: [0, 10], borderBottomLeftRadius: [10, 10] }}
+//                 backgroundColor='#40436A'
+//             >
+//                 <Flex flexDirection='column'>
+//                     <Box my={1} mb={3} color='#eee' p={15}>
+//                         <Heading fontSize={[2, 3]}>{product.data.title.text}</Heading>
+//                         <Text mt={[0, 20]} fontSize={[1, 2]}>
+//                             {product.data.title.text}
+//                         </Text>
+//                     </Box>
+//                 </Flex>
+//             </Box>
+//             <Box sx={{ flex: [1, 1] }}>
+//                 <Img className='card__image' style={{ height: 220 }} objectFit='contain' alt={product.data.title.text} fluid={product.data.image1.fluid} />
+//             </Box>
+//         </Flex>
+//     </LocalizedLink>
+// ))}
