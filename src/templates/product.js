@@ -12,18 +12,35 @@ export default ({ data }) => (
             <div className='sheet__inner'>
                 <h1 className='sheet__title'>{data.prismicProducts.data.title.text}</h1>
                 <p className='sheet__lead'>{data.prismicProducts.data.subtitle.text}</p>
-
                 <div className='sheet__slider'>
-                    <Slider infinite={true} dots={true} slidesToShow={1} arrows={true} speed={500}>
-                        <Img key={'img1'} fluid={data.prismicProducts.data.image1.fluid} />
-                        <Img key={'img2'} fluid={data.prismicProducts.data.image2.fluid} />
-                        <Img key={'img3'} fluid={data.prismicProducts.data.image3.fluid} />
-                        <Img key={'img4'} fluid={data.prismicProducts.data.image4.fluid} />
+                    <Slider infinite={true} autoplay={true} dots={true} slidesToShow={1} arrows={true} speed={500}>
+                        <figure>
+                            <Img fluid={data.prismicProducts.data.image1.fluid} />
+                            <figcaption>
+                                <h6 className='card__title'>{data.prismicProducts.data.caption1.text}</h6>
+                            </figcaption>
+                        </figure>
+                        <figure>
+                            <Img fluid={data.prismicProducts.data.image2.fluid} />
+                            <figcaption>
+                                <h6 className='card__title'>{data.prismicProducts.data.caption2.text}</h6>
+                            </figcaption>
+                        </figure>
+                        <figure>
+                            <Img fluid={data.prismicProducts.data.image3.fluid} />
+                            <figcaption>
+                                <h6 className='card__title'>{data.prismicProducts.data.caption3.text}</h6>
+                            </figcaption>
+                        </figure>
+                        <figure>
+                            <Img fluid={data.prismicProducts.data.image4.fluid} />
+                            <figcaption>
+                                <h6 className='card__title'>{data.prismicProducts.data.caption4.text}</h6>
+                            </figcaption>
+                        </figure>
                     </Slider>
                 </div>
-
-                <h1 className='sheet__price'>ID {data.prismicProducts.uid}</h1>
-                <h1 className='sheet__price'>USD {data.prismicProducts.data.price}</h1>
+                <h1 className='sheet__price'>USD ${data.prismicProducts.data.price}</h1>
                 <div className='sheet__body'>
                     <Button
                         className='snipcart-add-item'
@@ -81,6 +98,18 @@ export const query = graphql`
                     fluid(maxWidth: 1000, maxHeight: 800) {
                         ...GatsbyPrismicImageFluid
                     }
+                }
+                caption1 {
+                    text
+                }
+                caption2 {
+                    text
+                }
+                caption3 {
+                    text
+                }
+                caption4 {
+                    text
                 }
                 description {
                     html
