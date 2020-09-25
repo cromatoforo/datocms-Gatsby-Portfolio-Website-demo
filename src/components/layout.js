@@ -3,7 +3,6 @@
 import React, { useState, useContext } from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
-import { HelmetDatoCms } from 'gatsby-source-datocms'
 import { getCurrentLangKey, getLangs, getUrlForLang } from 'ptz-i18n'
 import { IntlProvider, FormattedMessage } from 'react-intl'
 import SelectLanguage from './SelectLanguage'
@@ -12,7 +11,7 @@ import { SnipcartContext } from 'gatsby-plugin-snipcart-advanced/context'
 import { Button, Pane, Text } from 'evergreen-ui'
 import { ThemeProvider } from 'emotion-theming'
 import theme from '@rebass/preset'
-
+import { Helmet } from 'react-helmet'
 import '../styles/index.sass'
 
 const LitteCart = () => {
@@ -95,41 +94,37 @@ const TemplateWrapper = ({ children }) => {
                             }
                         }
                     }
-                    datoCmsSite {
-                        globalSeo {
-                            siteName
-                        }
-                        faviconMetaTags {
-                            ...GatsbyDatoCmsFaviconMetaTags
-                        }
-                    }
-                    homeEs: datoCmsHome(locale: { eq: "es" }) {
-                        seoMetaTags {
-                            ...GatsbyDatoCmsSeoMetaTags
-                        }
-                        introTextNode {
-                            childMarkdownRemark {
-                                html
+                    homepageEn: prismicHome(lang: { eq: "en-us" }) {
+                        data {
+                            navtagline {
+                                text
+                            }
+                            copyright {
+                                text
                             }
                         }
-                        copyright
                     }
-                    homeEn: datoCmsHome(locale: { eq: "en" }) {
-                        seoMetaTags {
-                            ...GatsbyDatoCmsSeoMetaTags
-                        }
-                        introTextNode {
-                            childMarkdownRemark {
-                                html
+                    homepageEs: prismicHome(lang: { eq: "es-pr" }) {
+                        data {
+                            navtagline {
+                                text
+                            }
+                            copyright {
+                                text
                             }
                         }
-                        copyright
                     }
-                    allDatoCmsSocialProfile(filter: { locale: { eq: "es" } }, sort: { fields: [position], order: ASC }) {
+                    allPrismicSocialbutton(filter: { lang: { eq: "en-us" } }) {
                         edges {
                             node {
-                                profileType
-                                url
+                                data {
+                                    title {
+                                        text
+                                    }
+                                    url {
+                                        text
+                                    }
+                                }
                             }
                         }
                     }
@@ -148,7 +143,22 @@ const TemplateWrapper = ({ children }) => {
                         }
                     >
                         <div className={`container ${showMenu ? 'is-open' : ''}`}>
-                            <HelmetDatoCms favicon={data.datoCmsSite.faviconMetaTags} seo={data.homeEn.seoMetaTags} />
+                            <Helmet defer={false} defaultTitle={'test title'} titleTemplate={`%s | ${'test title'}`}>
+                                <html
+                                    lang={typeof window !== `undefined` ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) : null}
+                                />
+                                <link rel='canonical' href={pathname} />
+                                <meta property='og:type' content='website' />
+                                <meta
+                                    property='og:locale'
+                                    content={
+                                        typeof window !== `undefined` ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) : null
+                                    }
+                                />
+                                <meta name='docsearch:version' content='2.0' />
+                                <meta name='viewport' content='width=device-width,initial-scale=1,shrink-to-fit=no,viewport-fit=cover' />
+                            </Helmet>
+
                             <div className='container__sidebar'>
                                 <div className='sidebar'>
                                     <LocalizedLink to='/'>
@@ -161,8 +171,8 @@ const TemplateWrapper = ({ children }) => {
                                             __html:
                                                 typeof window !== `undefined`
                                                     ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) === 'es'
-                                                        ? data.homeEs.introTextNode.childMarkdownRemark.html
-                                                        : data.homeEn.introTextNode.childMarkdownRemark.html
+                                                        ? data.homepageEs.data.navtagline.text
+                                                        : data.homepageEn.data.navtagline.text
                                                     : null,
                                         }}
                                     />
@@ -211,10 +221,8 @@ const TemplateWrapper = ({ children }) => {
                                         </li>
                                     </ul>
                                     <p className='sidebar__social'>
-                                        {data.allDatoCmsSocialProfile.edges.map(({ node: profile }) => (
-                                            <a key={profile.profileType} href={profile.url} target='blank' className={`social social--${profile.profileType.toLowerCase()}`}>
-                                                {' '}
-                                            </a>
+                                        {data.allPrismicSocialbutton.edges.map(({ node: profile }) => (
+                                            <a key={profile.data.title.text} href={profile.data.url.text} target='blank' className={`social social--${profile.data.title.text.toLowerCase()}`} />
                                         ))}
                                     </p>
                                     <div>
@@ -248,7 +256,7 @@ const TemplateWrapper = ({ children }) => {
                                             <br />
                                         </div>
                                     )}
-                                    <div className='sidebar__copyright'>{data.homeEs.copyright}</div>
+                                    <div className='sidebar__copyright'>{data.homepageEn.data.copyright.text}</div>
                                 </div>
                             </div>
                             <div className='container__body'>
@@ -286,3 +294,15 @@ TemplateWrapper.propTypes = {
 
 export default TemplateWrapper
 /* eslint-enable jsx-a11y/anchor-has-content, jsx-a11y/anchor-is-valid*/
+
+// <meta property='og:url' content={href} />
+// <meta property='og:type' content='website' />
+// <meta property='og:locale' content={locale} />
+// <meta property='og:site_name' content={title} />
+// <meta property='og:image' content={`${siteUrl}${gatsbyIcon}`} />
+// <meta property='og:image:alt' content='Gatsby Logo' />
+// <meta property='og:image:width' content='512' />
+// <meta property='og:image:height' content='512' />
+
+// <meta name='twitter:card' content='summary' />
+// <meta name='twitter:site' content={twitter} />

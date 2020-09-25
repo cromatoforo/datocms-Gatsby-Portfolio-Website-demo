@@ -4,7 +4,7 @@ import Img from 'gatsby-image'
 import Masonry from 'react-masonry-component'
 import Layout from '../components/layout'
 import LocalizedLink from '../utils/LocalizedLink'
-import { Box, Flex, Heading, Text } from 'rebass'
+import { Box, Text } from 'rebass'
 import { Button } from 'evergreen-ui'
 import Slider from 'react-slick'
 const ProductsPage = ({ data }) => (

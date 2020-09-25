@@ -1,54 +1,61 @@
 {
     "Main": {
-      "uid": {
-        "type": "UID",
-        "config": {
-          "label": "SLUG"
+        "uid": {
+            "type": "UID",
+            "config": {
+                "label": "SLUG"
+            }
+        },
+        "store_image": {
+            "type": "Image",
+            "config": {
+                "constraint": {},
+                "thumbnails": [],
+                "label": "Store Image"
+            }
+        },
+        "store_tagline": {
+            "type": "StructuredText",
+            "config": {
+                "single": "paragraph",
+                "label": "Store Tagline"
+            }
+        },
+        "navtagline": {
+            "type": "StructuredText",
+            "config": {
+                "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+                "label": "navtagline"
+            }
+        },
+        "store_button": {
+            "type": "StructuredText",
+            "config": {
+                "single": "paragraph",
+                "label": "Store Button"
+            }
+        },
+        "home_tagline": {
+            "type": "StructuredText",
+            "config": {
+                "single": "paragraph",
+                "label": "Home Tagline"
+            }
+        },
+        "home_projects": {
+            "type": "StructuredText",
+            "config": {
+                "single": "paragraph",
+                "label": "Home Projects"
+            }
+        },
+        "copyright": {
+            "type": "StructuredText",
+            "config": {
+                "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+                "label": "copyright",
+                "placeholder": "© 2020 Lazum"
+            }
         }
-      },
-      "store_image": {
-        "type": "Image",
-        "config": {
-          "constraint": {},
-          "thumbnails": [],
-          "label": "Store Image"
-        }
-      },
-      "store_tagline": {
-        "type": "StructuredText",
-        "config": {
-          "single": "paragraph",
-          "label": "Store Tagline"
-        }
-      },
-      "store_button": {
-        "type": "StructuredText",
-        "config": {
-          "single": "paragraph",
-          "label": "Store Button"
-        }
-      },
-      "home_tagline": {
-        "type": "StructuredText",
-        "config": {
-          "single": "paragraph",
-          "label": "Home Tagline"
-        }
-      },
-      "home_projects": {
-        "type": "StructuredText",
-        "config": {
-          "single": "paragraph",
-          "label": "Home Projects"
-        }
-      },
-      "copyright": {
-        "type": "StructuredText",
-        "config": {
-          "single": "heading1, heading2, heading3, heading4, heading5, heading6",
-          "label": "copyright",
-          "placeholder": "© 2020 Lazum"
-        }
-      }
     }
-  }
+}

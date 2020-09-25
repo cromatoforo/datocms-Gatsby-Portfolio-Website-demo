@@ -3,7 +3,7 @@ import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import Layout from '../components/layout'
 import LocalizedLink from '../utils/LocalizedLink'
-import { Box, Flex, Heading, Button, Text } from 'rebass'
+import { Box, Flex, Button, Text } from 'rebass'
 
 const IndexPage = ({ data }) => (
     <Layout>
@@ -13,7 +13,7 @@ const IndexPage = ({ data }) => (
                     <Box sx={{ flex: [1, 1 / 2] }} backgroundColor='#06939B'>
                         <Flex flexDirection='column'>
                             <Box color='#eee' p={15}>
-                                <Heading
+                                <Text
                                     fontSize={[2, 3]}
                                     p={1}
                                     as='h3'
@@ -55,7 +55,7 @@ const IndexPage = ({ data }) => (
             </Box>
             <Box>
                 <Box color='#06939B' p={12} py={0}>
-                    <Heading dangerouslySetInnerHTML={{ __html: data.homepage.data.home_projects.html }} />
+                    <Text dangerouslySetInnerHTML={{ __html: data.homepage.data.home_projects.html }} />
                 </Box>
             </Box>
             {data.projects.edges.map(({ node: project }) => (
@@ -64,9 +64,9 @@ const IndexPage = ({ data }) => (
                         <Box sx={{ flex: [1, 1 / 2] }} backgroundColor='#40436A'>
                             <Flex flexDirection='column'>
                                 <Box my={1} mb={3} color='#eee' p={15}>
-                                    <Heading fontSize={[2, 3]}>{project.data.title.text}</Heading>
+                                    <Text fontSize={[2, 3]}>{project.data.title.text}</Text>
                                     <Text mt={[0, 20]} fontSize={[1, 2]}>
-                                        {project.data.title.text}
+                                        {project.data.subtitle.text}
                                     </Text>
                                 </Box>
                             </Flex>
@@ -115,6 +115,9 @@ export const query = graphql`
                     uid
                     data {
                         title {
+                            text
+                        }
+                        subtitle {
                             text
                         }
                         image1 {

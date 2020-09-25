@@ -32,17 +32,12 @@ module.exports = {
                     products_home: require('./src/schemas/products_home.json'),
                     about: require('./src/schemas/about.json'),
                     projects_home: require('./src/schemas/projects_home.json'),
+                    socialbutton: require('./src/schemas/socialbutton.json'),
                 },
                 // Get the correct URLs in blog posts
                 // linkResolver: () => prismicLinkResolver,
                 // PrismJS highlighting for labels and slices
                 // htmlSerializer: () => prismicHtmlSerializer,
-            },
-        },
-        {
-            resolve: `gatsby-source-datocms`,
-            options: {
-                apiToken: process.env.DATO_API_TOKEN,
             },
         },
         {
