@@ -4,6 +4,7 @@
     "version": "1.0.0",
     "author": "Rumi Humphrey <hola@tallerlazum.com>",
     "dependencies": {
+        "@rebass/hide": "^1.0.0-2",
         "@rebass/preset": "^4.0.5",
         "dotenv": "^8.1.0",
         "emotion-theming": "^10.0.27",
@@ -33,6 +34,7 @@
         "rebass": "^4.0.7",
         "slash": "^3.0.0",
         "slick-carousel": "^1.8.1",
+        "styled-components": "^5.2.0",
         "typography": "^0.16.19",
         "typography-breakpoint-constants": "^0.16.19"
     },

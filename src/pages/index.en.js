@@ -9,10 +9,10 @@ const IndexPage = ({ data }) => (
     <Layout>
         <Box>
             <LocalizedLink style={{ textDecoration: 'none' }} to={`/store`}>
-                <Flex px={2} py={2} flexDirection={['column-reverse', 'row']}>
-                    <Box sx={{ flex: [1, 1 / 2] }} backgroundColor='#06939B'>
+                <Flex flexDirection={['column-reverse', 'row']}>
+                    <Box sx={{ flex: [1, 1 / 2] }} backgroundColor='#C0DBD9'>
                         <Flex flexDirection='column'>
-                            <Box color='#eee' p={15}>
+                            <Box color='#000' p={2}>
                                 <Text
                                     fontSize={[2, 3]}
                                     p={1}
@@ -23,12 +23,12 @@ const IndexPage = ({ data }) => (
                                 />
                                 <Button
                                     mx={1}
-                                    my={2}
-                                    mb={3}
+                                    my={0}
+                                    mb={0}
                                     sx={{
                                         fontSize: 1,
-                                        borderRadius: 15,
-                                        color: '#40436A',
+                                        borderRadius: 3,
+                                        color: '#000',
                                         backgroundColor: '#FCB515',
                                     }}
                                     dangerouslySetInnerHTML={{
@@ -60,12 +60,14 @@ const IndexPage = ({ data }) => (
             </Box>
             {data.projects.edges.map(({ node: project }) => (
                 <LocalizedLink key={project.uid} style={{ textDecoration: 'none' }} to={`/projects/${project.uid}`}>
-                    <Flex px={2} py={2} flexDirection={['column-reverse', 'row']}>
-                        <Box sx={{ flex: [1, 1 / 2] }} backgroundColor='#40436A'>
+                    <Flex py={'1px'} flexDirection={['column-reverse', 'row']}>
+                        <Box sx={{ flex: [1, 1 / 2] }} backgroundColor='#C6C7E0'>
                             <Flex flexDirection='column'>
-                                <Box my={1} mb={3} color='#eee' p={15}>
-                                    <Text fontSize={[2, 3]}>{project.data.title.text}</Text>
-                                    <Text mt={[0, 20]} fontSize={[1, 2]}>
+                                <Box my={1} mb={1} color='#000' p={2}>
+                                    <Text fontWeight='700' fontSize={[2, 3]}>
+                                        {project.data.title.text}
+                                    </Text>
+                                    <Text mt={[0, 20]} fontSize={[2, 3]}>
                                         {project.data.subtitle.text}
                                     </Text>
                                 </Box>
