@@ -315,8 +315,8 @@ const TemplateWrapper = ({ children }) => {
                                 {children}
                             </div>
                             <Hide medium large>
-                                <Flex sx={{ padding: 3, backgroundColor: '#41416A', overflow: 'hidden', position: 'fixed', bottom: 0, width: '100%' }}>
-                                    <Flex flexDirection='column' flex={1}>
+                                <Flex sx={{ alignContent: 'center', py: '8px', backgroundColor: '#41416A', overflow: 'hidden', position: 'fixed', bottom: 0, width: '100%' }}>
+                                    <Flex flexDirection='column' sx={{ alignItems: 'center' }} flex={1}>
                                         <LocalizedLink to='/'>
                                             <Box flex={1}>
                                                 <MenuIcon name='homeIcon' color='white' />
@@ -331,9 +331,9 @@ const TemplateWrapper = ({ children }) => {
                                             </Box>
                                         </LocalizedLink>
                                     </Flex>
-                                    <Flex flexDirection='column' flex={1}>
+                                    <Flex flexDirection='column' flex={1} sx={{ alignItems: 'center' }}>
                                         <LocalizedLink to='/projects'>
-                                            <Box flex={1}>
+                                            <Box flex={1} pl={'8px'}>
                                                 <MenuIcon name='projectsIcon' color='white' />
                                             </Box>
                                             <Box flex={1}>
@@ -346,7 +346,7 @@ const TemplateWrapper = ({ children }) => {
                                             </Box>
                                         </LocalizedLink>
                                     </Flex>
-                                    <Flex flexDirection='column' flex={1}>
+                                    <Flex flexDirection='column' flex={1} sx={{ alignItems: 'center' }}>
                                         <LocalizedLink to='/store'>
                                             <Box flex={1}>
                                                 <MenuIcon name='tiendaIcon' color='white' />
@@ -361,7 +361,7 @@ const TemplateWrapper = ({ children }) => {
                                             </Box>
                                         </LocalizedLink>
                                     </Flex>
-                                    <Flex flexDirection='column' flex={1}>
+                                    <Flex flexDirection='column' flex={1} sx={{ alignItems: 'center' }}>
                                         {pathname.indexOf('/products') >= 0 || pathname.indexOf('/store') >= 0 || cartQuantity > 0 ? (
                                             <LocalizedLink to='/cart'>
                                                 <Box flex={1}>
@@ -378,7 +378,7 @@ const TemplateWrapper = ({ children }) => {
                                             </LocalizedLink>
                                         ) : (
                                             <LocalizedLink to='/cart'>
-                                                <Box flex={1}>
+                                                <Box pl='5px' flex={1}>
                                                     <MenuIcon name='idiomaIcon' color='white' />
                                                 </Box>
                                                 <Box flex={1}>
