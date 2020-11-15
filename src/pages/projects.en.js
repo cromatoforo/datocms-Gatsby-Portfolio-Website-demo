@@ -4,7 +4,7 @@ import Img from 'gatsby-image'
 import Masonry from 'react-masonry-component'
 import Layout from '../components/layout'
 import LocalizedLink from '../utils/LocalizedLink'
-import { Box, Text } from 'rebass'
+import { Flex, Box, Text } from 'rebass'
 
 import Slider from 'react-slick'
 const ProjectsPage = ({ data }) => (
@@ -65,28 +65,27 @@ const ProjectsPage = ({ data }) => (
                         </Box>
                     </Box>
                     <Box>
-                        <Masonry className='showcase'>
-                            {data.projects.edges.map(({ node: project }) => (
-                                <div key={project.uid} className='showcase__item'>
-                                    <figure className='card'>
-                                        <LocalizedLink to={`/projects/${project.uid}`} className='card__image'>
-                                            <Img fluid={project.data.image1.fluid} />
-                                        </LocalizedLink>
-                                        <figcaption className='card__caption'>
-                                            <h6 className='card__title'>
-                                                <LocalizedLink to={`/projects/${project.uid}`}>{project.data.title.text}</LocalizedLink>
-                                            </h6>
-                                            <div
-                                                className='card__description'
-                                                dangerouslySetInnerHTML={{
-                                                    __html: project.data.subtitle.text,
-                                                }}
-                                            ></div>
-                                        </figcaption>
-                                    </figure>
-                                </div>
-                            ))}
-                        </Masonry>
+                        {data.projects.edges.map(({ node: project }) => (
+                            <LocalizedLink key={project.uid} style={{ textDecoration: 'none' }} to={`/projects/${project.uid}`}>
+                                <Flex py={'1px'} flexDirection={['column-reverse', 'row']}>
+                                    <Box sx={{ flex: [1, 1 / 2] }} backgroundColor='#C6C7E0'>
+                                        <Flex flexDirection='column'>
+                                            <Box my={1} mb={1} color='#000' p={2}>
+                                                <Text fontWeight='700' fontSize={[2, 3]}>
+                                                    {project.data.title.text}
+                                                </Text>
+                                                <Text mt={[0, 20]} fontSize={[2, 3]}>
+                                                    {project.data.subtitle.text}
+                                                </Text>
+                                            </Box>
+                                        </Flex>
+                                    </Box>
+                                    <Box sx={{ flex: [1, 1] }}>
+                                        <Img style={{ height: 220 }} objectFit='contain' alt={project.data.title.text} fluid={project.data.image1.fluid} />
+                                    </Box>
+                                </Flex>
+                            </LocalizedLink>
+                        ))}
                     </Box>
                 </Box>
             </div>

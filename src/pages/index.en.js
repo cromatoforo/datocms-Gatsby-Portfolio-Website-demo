@@ -8,15 +8,27 @@ import { Box, Flex, Button, Text } from 'rebass'
 const IndexPage = ({ data }) => (
     <Layout>
         <Box>
+            <Box>
+                <Box pb={[1]} color='#40436A'>
+                    <Text
+                        px={[2, 0]}
+                        py={2}
+                        fontSize={3}
+                        dangerouslySetInnerHTML={{
+                            __html: data.homepage.data.home_tagline.html,
+                        }}
+                    />
+                </Box>
+            </Box>
+
             <LocalizedLink style={{ textDecoration: 'none' }} to={`/store`}>
-                <Flex flexDirection={['column-reverse', 'row']}>
+                <Flex flexDirection={['column-reverse', 'row']} pb={2}>
                     <Box sx={{ flex: [1, 1 / 2] }} backgroundColor='#C0DBD9'>
                         <Flex flexDirection='column'>
-                            <Box color='#000' p={2}>
+                            <Box color='#000' p={[3, 2]}>
                                 <Text
                                     fontSize={[2, 3]}
-                                    p={1}
-                                    as='h3'
+                                    p={[2, 2]}
                                     dangerouslySetInnerHTML={{
                                         __html: data.homepage.data.store_tagline.html,
                                     }}
@@ -24,7 +36,7 @@ const IndexPage = ({ data }) => (
                                 <Button
                                     mx={1}
                                     my={0}
-                                    mb={0}
+                                    mb={[2, 0]}
                                     sx={{
                                         fontSize: 1,
                                         borderRadius: 3,
@@ -43,19 +55,10 @@ const IndexPage = ({ data }) => (
                     </Box>
                 </Flex>
             </LocalizedLink>
+
             <Box>
-                <Box p={12} color='#40436A'>
-                    <Text
-                        fontSize={3}
-                        dangerouslySetInnerHTML={{
-                            __html: data.homepage.data.home_tagline.html,
-                        }}
-                    />
-                </Box>
-            </Box>
-            <Box>
-                <Box color='#06939B' p={12} py={0}>
-                    <Text dangerouslySetInnerHTML={{ __html: data.homepage.data.home_projects.html }} />
+                <Box>
+                    <Text px={[2, 0]} py={2} fontSize={3} dangerouslySetInnerHTML={{ __html: data.homepage.data.home_projects.html }} />
                 </Box>
             </Box>
             {data.projects.edges.map(({ node: project }) => (
@@ -63,11 +66,11 @@ const IndexPage = ({ data }) => (
                     <Flex py={'1px'} flexDirection={['column-reverse', 'row']}>
                         <Box sx={{ flex: [1, 1 / 2] }} backgroundColor='#C6C7E0'>
                             <Flex flexDirection='column'>
-                                <Box my={1} mb={1} color='#000' p={2}>
+                                <Box my={1} mb={1} color='#000' p={[2, 3]}>
                                     <Text fontWeight='700' fontSize={[2, 3]}>
                                         {project.data.title.text}
                                     </Text>
-                                    <Text mt={[0, 20]} fontSize={[2, 3]}>
+                                    <Text mt={[0, 20]} fontSize={[2, 2]}>
                                         {project.data.subtitle.text}
                                     </Text>
                                 </Box>

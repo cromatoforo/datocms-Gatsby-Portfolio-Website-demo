@@ -6,6 +6,7 @@ import { StaticQuery, graphql } from 'gatsby'
 import { getCurrentLangKey, getLangs, getUrlForLang } from 'ptz-i18n'
 import { IntlProvider, FormattedMessage } from 'react-intl'
 import SelectLanguage from './SelectLanguage'
+import MenuSelectLang from './MenuSelectLang'
 import MenuIcon from './MenuIcon'
 import LocalizedLink from '../utils/LocalizedLink'
 import { SnipcartContext } from 'gatsby-plugin-snipcart-advanced/context'
@@ -319,10 +320,33 @@ const TemplateWrapper = ({ children }) => {
                                     <Flex flexDirection='column' sx={{ alignItems: 'center' }} flex={1}>
                                         <LocalizedLink to='/'>
                                             <Box flex={1}>
-                                                <MenuIcon name='homeIcon' color='white' />
+                                                <MenuIcon
+                                                    name='homeIcon'
+                                                    color={
+                                                        pathname ===
+                                                        `/${
+                                                            typeof window !== `undefined`
+                                                                ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)
+                                                                : null
+                                                        }/`
+                                                            ? '#FCB913'
+                                                            : 'white'
+                                                    }
+                                                />
                                             </Box>
                                             <Box flex={1}>
-                                                <Text color='white'>
+                                                <Text
+                                                    color={
+                                                        pathname ===
+                                                        `/${
+                                                            typeof window !== `undefined`
+                                                                ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)
+                                                                : null
+                                                        }/`
+                                                            ? '#FCB913'
+                                                            : 'white'
+                                                    }
+                                                >
                                                     {typeof window !== `undefined` &&
                                                     getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) === 'es'
                                                         ? data.homepageEs.data.homeicon.text
@@ -334,10 +358,10 @@ const TemplateWrapper = ({ children }) => {
                                     <Flex flexDirection='column' flex={1} sx={{ alignItems: 'center' }}>
                                         <LocalizedLink to='/projects'>
                                             <Box flex={1} pl={'8px'}>
-                                                <MenuIcon name='projectsIcon' color='white' />
+                                                <MenuIcon name='projectsIcon' color={pathname.indexOf('/projects') >= 0 ? '#FCB913' : 'white'} />
                                             </Box>
                                             <Box flex={1}>
-                                                <Text color='white'>
+                                                <Text color={pathname.indexOf('/projects') >= 0 ? '#FCB913' : 'white'}>
                                                     {typeof window !== `undefined` &&
                                                     getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) === 'es'
                                                         ? data.homepageEs.data.projectsicon.text
@@ -349,10 +373,10 @@ const TemplateWrapper = ({ children }) => {
                                     <Flex flexDirection='column' flex={1} sx={{ alignItems: 'center' }}>
                                         <LocalizedLink to='/store'>
                                             <Box flex={1}>
-                                                <MenuIcon name='tiendaIcon' color='white' />
+                                                <MenuIcon name='tiendaIcon' color={pathname.indexOf('/products') >= 0 || pathname.indexOf('/store') >= 0 ? '#FCB913' : 'white'} />
                                             </Box>
                                             <Box flex={1}>
-                                                <Text color='white'>
+                                                <Text color={pathname.indexOf('/products') >= 0 || pathname.indexOf('/store') >= 0 ? '#FCB913' : 'white'}>
                                                     {typeof window !== `undefined` &&
                                                     getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) === 'es'
                                                         ? data.homepageEs.data.tiendaicon.text
@@ -363,7 +387,7 @@ const TemplateWrapper = ({ children }) => {
                                     </Flex>
                                     <Flex flexDirection='column' flex={1} sx={{ alignItems: 'center' }}>
                                         {pathname.indexOf('/products') >= 0 || pathname.indexOf('/store') >= 0 || cartQuantity > 0 ? (
-                                            <LocalizedLink to='/cart'>
+                                            <Box className='snipcart-checkout'>
                                                 <Box flex={1}>
                                                     <MenuIcon name='cartIcon' color='white' />
                                                 </Box>
@@ -371,25 +395,40 @@ const TemplateWrapper = ({ children }) => {
                                                     <Text color='white'>
                                                         {typeof window !== `undefined` &&
                                                         getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) === 'es'
-                                                            ? data.homepageEs.data.carticon.text
-                                                            : data.homepageEn.data.carticon.text}
+                                                            ? 'Ver ' + data.homepageEs.data.carticon.text + ' (' + cartQuantity + ')'
+                                                            : 'View ' + data.homepageEn.data.carticon.text + ' (' + cartQuantity + ')'}
                                                     </Text>
                                                 </Box>
-                                            </LocalizedLink>
+                                            </Box>
                                         ) : (
-                                            <LocalizedLink to='/cart'>
-                                                <Box pl='5px' flex={1}>
-                                                    <MenuIcon name='idiomaIcon' color='white' />
-                                                </Box>
-                                                <Box flex={1}>
-                                                    <Text color='white'>
-                                                        {typeof window !== `undefined` &&
-                                                        getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) === 'es'
-                                                            ? data.homepageEs.data.idiomaicon.text
-                                                            : data.homepageEn.data.idiomaicon.text}
-                                                    </Text>
-                                                </Box>
-                                            </LocalizedLink>
+                                            <Box flex={1}>
+                                                <MenuSelectLang
+                                                    langs={
+                                                        typeof window !== `undefined`
+                                                            ? getLangs(
+                                                                  data.site.siteMetadata.languages.langs,
+                                                                  typeof window !== `undefined`
+                                                                      ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)
+                                                                      : null,
+                                                                  typeof window !== `undefined`
+                                                                      ? getUrlForLang(
+                                                                            `/${
+                                                                                typeof window !== `undefined`
+                                                                                    ? getCurrentLangKey(
+                                                                                          data.site.siteMetadata.languages.langs,
+                                                                                          data.site.siteMetadata.languages.defaultLangKey,
+                                                                                          pathname
+                                                                                      )
+                                                                                    : null
+                                                                            }/`,
+                                                                            pathname
+                                                                        )
+                                                                      : null
+                                                              )
+                                                            : null
+                                                    }
+                                                />
+                                            </Box>
                                         )}
                                     </Flex>
                                 </Flex>

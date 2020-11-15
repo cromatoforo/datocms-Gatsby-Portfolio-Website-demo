@@ -13,8 +13,18 @@
 @import "../../node_modules/slick-carousel/slick/slick-theme.css"
 
 body 
-    margin: 0;
     padding: 0;
+    max-width: 1200px;
+
+@media screen and (max-width: 899px)
+    body
+        margin: 0rem;
+        padding-bottom: 90px 
+
+@media screen and (min-width: 900px)
+    body
+        margin: 0.5rem;
+        padding-bottom: 0px 
 
 
 a,

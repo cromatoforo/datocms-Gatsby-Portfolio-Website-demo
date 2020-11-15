@@ -100,7 +100,7 @@ const ProductsPage = ({ data }) => (
                                                 data-item-name={product.data.title.text}
                                                 data-item-quantity='1'
                                             >
-                                                {'Add to Cart'}
+                                                {data.productspage.data.button_text.text}
                                             </Button>
                                         </figcaption>
                                     </figure>
@@ -126,6 +126,9 @@ export const query = graphql`
                 }
                 sub_title {
                     html
+                    text
+                }
+                button_text {
                     text
                 }
                 about_lazum_store {
