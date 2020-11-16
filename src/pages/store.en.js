@@ -4,7 +4,7 @@ import Img from 'gatsby-image'
 import Masonry from 'react-masonry-component'
 import Layout from '../components/layout'
 import LocalizedLink from '../utils/LocalizedLink'
-import { Box, Text } from 'rebass'
+import { Box, Text, Flex } from 'rebass'
 import { Button } from 'evergreen-ui'
 import Slider from 'react-slick'
 const ProductsPage = ({ data }) => (
@@ -55,9 +55,9 @@ const ProductsPage = ({ data }) => (
                             </div>
                         </Box>
 
-                        <Box p={12} color='#40436A'>
+                        <Box p={2} pb={4} color='#40436A'>
                             <Text
-                                fontSize={3}
+                                fontSize={2}
                                 dangerouslySetInnerHTML={{
                                     __html: data.productspage.data.about_lazum_store.html,
                                 }}
@@ -69,7 +69,7 @@ const ProductsPage = ({ data }) => (
                             {data.products.edges.map(({ node: product }) => (
                                 <div key={product.uid} className='showcase__item'>
                                     <figure className='card'>
-                                        <LocalizedLink to={`/products/${product.uid}`} className='card__image'>
+                                        <LocalizedLink to={`/products/${product.uid}`}>
                                             <Img fluid={product.data.image1.fluid} />
                                         </LocalizedLink>
                                         <figcaption className='card__caption'>
@@ -82,26 +82,31 @@ const ProductsPage = ({ data }) => (
                                                     __html: product.data.subtitle.text,
                                                 }}
                                             ></div>
-                                            <div
-                                                style={{ paddingTop: 10 }}
-                                                className='card__title'
-                                                dangerouslySetInnerHTML={{
-                                                    __html: '$' + product.data.price,
-                                                }}
-                                            ></div>
-                                            <Button
-                                                marginTop={5}
-                                                className='snipcart-add-item'
-                                                data-item-id={product.uid}
-                                                data-item-price={product.data.price}
-                                                data-item-url={'/en/store'}
-                                                data-item-description={product.data.subtitle.text}
-                                                data-item-image={product.data.image1.url}
-                                                data-item-name={product.data.title.text}
-                                                data-item-quantity='1'
-                                            >
-                                                {product.uid}
-                                            </Button>
+                                            <Flex flexDirection={'row'}>
+                                                <Box flex={0.5}>
+                                                    <Text
+                                                        sx={{ paddingTop: 10, fontWeight: 'bold', fontSize: 2 }}
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: '$' + product.data.price,
+                                                        }}
+                                                    ></Text>
+                                                </Box>
+                                                <Box flex={1}>
+                                                    <Button
+                                                        marginTop={5}
+                                                        className='snipcart-add-item'
+                                                        data-item-id={product.uid}
+                                                        data-item-price={product.data.price}
+                                                        data-item-url={'/es/store'}
+                                                        data-item-description={product.data.subtitle.text}
+                                                        data-item-image={product.data.image1.url}
+                                                        data-item-name={product.data.title.text}
+                                                        data-item-quantity='1'
+                                                    >
+                                                        {data.productspage.data.button_text.text}
+                                                    </Button>
+                                                </Box>
+                                            </Flex>
                                         </figcaption>
                                     </figure>
                                 </div>
@@ -184,29 +189,3 @@ export const query = graphql`
         }
     }
 `
-
-// data-item-taxes={tva}
-//disabled={_stock === 0 ? true : false}
-
-// {data.products.edges.map(({ node: product }) => (
-//     <LocalizedLink key={product.uid} style={{ textDecoration: 'none' }} to={`/products/${product.uid}`}>
-//         <Flex px={2} py={2} flexDirection={['column-reverse', 'row']}>
-//             <Box
-//                 sx={{ flex: [1, 1 / 2], borderTopRightRadius: [0, 0], borderBottomRightRadius: [10, 0], borderTopLeftRadius: [0, 10], borderBottomLeftRadius: [10, 10] }}
-//                 backgroundColor='#40436A'
-//             >
-//                 <Flex flexDirection='column'>
-//                     <Box my={1} mb={3} color='#eee' p={15}>
-//                         <Heading fontSize={[2, 3]}>{product.data.title.text}</Heading>
-//                         <Text mt={[0, 20]} fontSize={[1, 2]}>
-//                             {product.data.title.text}
-//                         </Text>
-//                     </Box>
-//                 </Flex>
-//             </Box>
-//             <Box sx={{ flex: [1, 1] }}>
-//                 <Img className='card__image' style={{ height: 220 }} objectFit='contain' alt={product.data.title.text} fluid={product.data.image1.fluid} />
-//             </Box>
-//         </Flex>
-//     </LocalizedLink>
-// ))}

@@ -30,29 +30,27 @@ const ProjectsPage = ({ data }) => (
                             />
                         </Box>
 
-                        <Box p={12} color='#40436A'>
-                            <div className='sheet__slider'>
-                                <Slider infinite={true} autoplay={true} dots={true} slidesToShow={1} arrows={true} speed={500}>
-                                    <figure>
-                                        <Img fluid={data.projectspage.data.image1.fluid} />
-                                        <figcaption>
-                                            <h6 className='card__title'>{data.projectspage.data.caption1.text}</h6>
-                                        </figcaption>
-                                    </figure>
-                                    <figure>
-                                        <Img fluid={data.projectspage.data.image2.fluid} />
-                                        <figcaption>
-                                            <h6 className='card__title'>{data.projectspage.data.caption2.text}</h6>
-                                        </figcaption>
-                                    </figure>
-                                    <figure>
-                                        <Img fluid={data.projectspage.data.image3.fluid} />
-                                        <figcaption>
-                                            <h6 className='card__title'>{data.projectspage.data.caption3.text}</h6>
-                                        </figcaption>
-                                    </figure>
-                                </Slider>
-                            </div>
+                        <Box p={0} pb={4} color='#40436A'>
+                            <Slider infinite={true} autoplay={true} dots={true} slidesToShow={1} arrows={true} speed={500}>
+                                <figure>
+                                    <Img fluid={data.projectspage.data.image1.fluid} />
+                                    <figcaption>
+                                        <h6 className='card__title'>{data.projectspage.data.caption1.text}</h6>
+                                    </figcaption>
+                                </figure>
+                                <figure>
+                                    <Img fluid={data.projectspage.data.image2.fluid} />
+                                    <figcaption>
+                                        <h6 className='card__title'>{data.projectspage.data.caption2.text}</h6>
+                                    </figcaption>
+                                </figure>
+                                <figure>
+                                    <Img fluid={data.projectspage.data.image3.fluid} />
+                                    <figcaption>
+                                        <h6 className='card__title'>{data.projectspage.data.caption3.text}</h6>
+                                    </figcaption>
+                                </figure>
+                            </Slider>
                         </Box>
 
                         <Box p={12} color='#40436A'>
@@ -67,7 +65,7 @@ const ProjectsPage = ({ data }) => (
                     <Box>
                         {data.projects.edges.map(({ node: project }) => (
                             <LocalizedLink key={project.uid} style={{ textDecoration: 'none' }} to={`/projects/${project.uid}`}>
-                                <Flex py={'1px'} flexDirection={['column-reverse', 'row']}>
+                                <Flex className='card' mb={'6px'} flexDirection={['column-reverse', 'row']}>
                                     <Box sx={{ flex: [1, 1 / 2] }} backgroundColor='#C6C7E0'>
                                         <Flex flexDirection='column'>
                                             <Box my={1} mb={1} color='#000' p={2}>
@@ -157,29 +155,3 @@ export const query = graphql`
         }
     }
 `
-
-// data-item-taxes={tva}
-//disabled={_stock === 0 ? true : false}
-
-// {data.products.edges.map(({ node: product }) => (
-//     <LocalizedLink key={product.uid} style={{ textDecoration: 'none' }} to={`/products/${product.uid}`}>
-//         <Flex px={2} py={2} flexDirection={['column-reverse', 'row']}>
-//             <Box
-//                 sx={{ flex: [1, 1 / 2], borderTopRightRadius: [0, 0], borderBottomRightRadius: [10, 0], borderTopLeftRadius: [0, 10], borderBottomLeftRadius: [10, 10] }}
-//                 backgroundColor='#40436A'
-//             >
-//                 <Flex flexDirection='column'>
-//                     <Box my={1} mb={3} color='#eee' p={15}>
-//                         <Heading fontSize={[2, 3]}>{product.data.title.text}</Heading>
-//                         <Text mt={[0, 20]} fontSize={[1, 2]}>
-//                             {product.data.title.text}
-//                         </Text>
-//                     </Box>
-//                 </Flex>
-//             </Box>
-//             <Box sx={{ flex: [1, 1] }}>
-//                 <Img className='card__image' style={{ height: 220 }} objectFit='contain' alt={product.data.title.text} fluid={product.data.image1.fluid} />
-//             </Box>
-//         </Flex>
-//     </LocalizedLink>
-// ))}

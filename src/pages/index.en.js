@@ -7,82 +7,86 @@ import { Box, Flex, Button, Text } from 'rebass'
 
 const IndexPage = ({ data }) => (
     <Layout>
-        <Box>
-            <Box>
-                <Box pb={[1]} color='#40436A'>
-                    <Text
-                        px={[2, 0]}
-                        py={2}
-                        fontSize={3}
-                        dangerouslySetInnerHTML={{
-                            __html: data.homepage.data.home_tagline.html,
-                        }}
-                    />
-                </Box>
-            </Box>
+        <article className='sheet'>
+            <div className='sheet__inner'>
+                <Box>
+                    <Box>
+                        <Box pb={[1]} color='#40436A'>
+                            <Text
+                                px={[2, 0]}
+                                py={2}
+                                fontSize={3}
+                                dangerouslySetInnerHTML={{
+                                    __html: data.homepage.data.home_tagline.html,
+                                }}
+                            />
+                        </Box>
+                    </Box>
 
-            <LocalizedLink style={{ textDecoration: 'none' }} to={`/store`}>
-                <Flex flexDirection={['column-reverse', 'row']} pb={2}>
-                    <Box sx={{ flex: [1, 1 / 2] }} backgroundColor='#C0DBD9'>
-                        <Flex flexDirection='column'>
-                            <Box color='#000' p={[3, 2]}>
-                                <Text
-                                    fontSize={[2, 3]}
-                                    p={[2, 2]}
-                                    dangerouslySetInnerHTML={{
-                                        __html: data.homepage.data.store_tagline.html,
-                                    }}
-                                />
-                                <Button
-                                    mx={1}
-                                    my={0}
-                                    mb={[2, 0]}
-                                    sx={{
-                                        fontSize: 1,
-                                        borderRadius: 3,
-                                        color: '#000',
-                                        backgroundColor: '#FCB515',
-                                    }}
-                                    dangerouslySetInnerHTML={{
-                                        __html: data.homepage.data.store_button.html,
-                                    }}
-                                />
+                    <LocalizedLink style={{ textDecoration: 'none' }} to={`/store`}>
+                        <Flex className='card' flexDirection={['column-reverse', 'row']} pb={0} mb={2}>
+                            <Box sx={{ flex: [1, 1 / 2] }} backgroundColor='#C0DBD9'>
+                                <Flex flexDirection='column'>
+                                    <Box color='#000' p={[3, 2]}>
+                                        <Text
+                                            fontSize={[2, 3]}
+                                            p={[2, 2]}
+                                            dangerouslySetInnerHTML={{
+                                                __html: data.homepage.data.store_tagline.html,
+                                            }}
+                                        />
+                                        <Button
+                                            mx={1}
+                                            my={0}
+                                            mb={[2, 0]}
+                                            sx={{
+                                                fontSize: 1,
+                                                borderRadius: 3,
+                                                color: '#000',
+                                                backgroundColor: '#FCB515',
+                                            }}
+                                            dangerouslySetInnerHTML={{
+                                                __html: data.homepage.data.store_button.html,
+                                            }}
+                                        />
+                                    </Box>
+                                </Flex>
+                            </Box>
+                            <Box sx={{ flex: [1, 1] }}>
+                                <Img style={{ height: 220 }} objectFit='contain' fluid={data.homepage.data.store_image.fluid} />
                             </Box>
                         </Flex>
-                    </Box>
-                    <Box sx={{ flex: [1, 1] }}>
-                        <Img style={{ height: 220 }} objectFit='contain' fluid={data.homepage.data.store_image.fluid} />
-                    </Box>
-                </Flex>
-            </LocalizedLink>
+                    </LocalizedLink>
 
-            <Box>
-                <Box>
-                    <Text px={[2, 0]} py={2} fontSize={3} dangerouslySetInnerHTML={{ __html: data.homepage.data.home_projects.html }} />
-                </Box>
-            </Box>
-            {data.projects.edges.map(({ node: project }) => (
-                <LocalizedLink key={project.uid} style={{ textDecoration: 'none' }} to={`/projects/${project.uid}`}>
-                    <Flex py={'1px'} flexDirection={['column-reverse', 'row']}>
-                        <Box sx={{ flex: [1, 1 / 2] }} backgroundColor='#C6C7E0'>
-                            <Flex flexDirection='column'>
-                                <Box my={1} mb={1} color='#000' p={[2, 3]}>
-                                    <Text fontWeight='700' fontSize={[2, 3]}>
-                                        {project.data.title.text}
-                                    </Text>
-                                    <Text mt={[0, 20]} fontSize={[2, 2]}>
-                                        {project.data.subtitle.text}
-                                    </Text>
+                    <Box>
+                        <Box>
+                            <Text px={[2, 0]} py={2} fontSize={3} dangerouslySetInnerHTML={{ __html: data.homepage.data.home_projects.html }} />
+                        </Box>
+                    </Box>
+                    {data.projects.edges.map(({ node: project }) => (
+                        <LocalizedLink key={project.uid} style={{ textDecoration: 'none' }} to={`/projects/${project.uid}`}>
+                            <Flex className='card' mb={'6px'} flexDirection={['column-reverse', 'row']}>
+                                <Box sx={{ flex: [1, 1 / 2] }} backgroundColor='#C6C7E0'>
+                                    <Flex flexDirection='column'>
+                                        <Box my={1} mb={1} color='#000' p={[2, 3]}>
+                                            <Text fontWeight='700' fontSize={[2, 3]}>
+                                                {project.data.title.text}
+                                            </Text>
+                                            <Text mt={[0, 20]} fontSize={[2, 2]}>
+                                                {project.data.subtitle.text}
+                                            </Text>
+                                        </Box>
+                                    </Flex>
+                                </Box>
+                                <Box sx={{ flex: [1, 1] }}>
+                                    <Img style={{ height: 220 }} objectFit='contain' alt={project.data.title.text} fluid={project.data.image1.fluid} />
                                 </Box>
                             </Flex>
-                        </Box>
-                        <Box sx={{ flex: [1, 1] }}>
-                            <Img style={{ height: 220 }} objectFit='contain' alt={project.data.title.text} fluid={project.data.image1.fluid} />
-                        </Box>
-                    </Flex>
-                </LocalizedLink>
-            ))}
-        </Box>
+                        </LocalizedLink>
+                    ))}
+                </Box>
+            </div>
+        </article>
     </Layout>
 )
 
@@ -136,48 +140,3 @@ export const query = graphql`
         }
     }
 `
-
-// <Box sx={{ flex: [1, 1] }}>
-// <Img className='card__image' style={{ height: 220 }} objectFit='contain' alt={data.home.storeButton} fluid={data.home.storeImage.fluid} />
-// </Box>
-
-// allDatoCmsWork(filter: { locale: { eq: "en" } }, sort: { fields: [position], order: ASC }) {
-//     edges {
-//         node {
-//             id
-//             title
-//             slug
-//             excerpt
-//             coverImage {
-//                 fluid(maxWidth: 450, imgixParams: { fm: "jpg", auto: "compress" }) {
-//                     ...GatsbyDatoCmsSizes
-//                 }
-//             }
-//         }
-//     }
-// }
-
-// <Box>
-// {data.allDatoCmsWork.edges.map(({ node: work }) => (
-//     <LocalizedLink key={work.id} style={{ textDecoration: 'none' }} to={`/projects/${work.slug}`}>
-//         <Flex px={2} py={2} flexDirection={['column-reverse', 'row']}>
-//             <Box
-//                 sx={{ flex: [1, 1 / 2], borderTopRightRadius: [0, 0], borderBottomRightRadius: [10, 0], borderTopLeftRadius: [0, 10], borderBottomLeftRadius: [10, 10] }}
-//                 backgroundColor='#40436A'
-//             >
-//                 <Flex flexDirection='column'>
-//                     <Box my={1} mb={3} color='#eee' p={15}>
-//                         <Heading fontSize={[2, 3]}>{work.title}</Heading>
-//                         <Text mt={[0, 20]} fontSize={[1, 2]}>
-//                             {work.excerpt}
-//                         </Text>
-//                     </Box>
-//                 </Flex>
-//             </Box>
-//             <Box sx={{ flex: [1, 1] }}>
-//                 <Img className='card__image' style={{ height: 220 }} objectFit='contain' alt={work.title} fluid={work.coverImage.fluid} />
-//             </Box>
-//         </Flex>
-//     </LocalizedLink>
-// ))}
-// </Box>
