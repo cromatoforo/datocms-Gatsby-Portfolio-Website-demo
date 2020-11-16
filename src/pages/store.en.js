@@ -97,7 +97,7 @@ const ProductsPage = ({ data }) => (
                                                         className='snipcart-add-item'
                                                         data-item-id={product.uid}
                                                         data-item-price={product.data.price}
-                                                        data-item-url={'/es/store'}
+                                                        data-item-url={'/en/store'}
                                                         data-item-description={product.data.subtitle.text}
                                                         data-item-image={product.data.image1.url}
                                                         data-item-name={product.data.title.text}
