@@ -35,9 +35,9 @@ const CustomForm = ({ status, message, onValidated }) => {
                 <FormattedMessage id='joinTag' />
             </Text>
             <Flex>
-                <TextInput
-                    marginTop='12px'
+                <input
                     style={{
+                        marginTop: '12px',
                         padding: '10px',
                         width: '160px',
                     }}

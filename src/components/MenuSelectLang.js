@@ -12,7 +12,7 @@ const MenuSelectLang = (props) => {
     const links = props.langs
         ? props.langs.map((lang) =>
               lang.selected === false ? (
-                  <Link to={lang.link}>
+                  <Link key={lang.langKey} to={lang.link}>
                       <Box key={lang.langKey} onClick={() => changeLanguage(lang.langKey)}>
                           <Box pl='5px' flex={1}>
                               <MenuIcon name='idiomaIcon' color='white' />

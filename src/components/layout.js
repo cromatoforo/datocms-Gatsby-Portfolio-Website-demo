@@ -105,9 +105,9 @@ const CustomForm = ({ status, message, onValidated }) => {
             <Text>
                 <FormattedMessage id='joinTag' />
             </Text>
-            <TextInput
-                marginTop='12px'
+            <input
                 style={{
+                    marginTop: '12px',
                     padding: '10px',
                     width: '160px',
                 }}
@@ -121,6 +121,37 @@ const CustomForm = ({ status, message, onValidated }) => {
         </div>
     )
 }
+
+const CustomForm2 = ({ status, message, onValidated }) => {
+    let email
+    const submit = () =>
+        email &&
+        email.value.indexOf('@') > -1 &&
+        onValidated({
+            EMAIL: email.value,
+        })
+
+    return (
+        <div
+            style={{
+                //background: "#3b597d",
+                borderRadius: 4,
+                width: 240,
+                display: 'flex',
+            }}
+        >
+            {status === 'sending' && <div style={{ color: 'blue' }}>sending...</div>}
+            {status === 'error' && <div style={{ color: 'red' }} dangerouslySetInnerHTML={{ __html: message }} />}
+            {status === 'success' && <div style={{ color: 'green' }} dangerouslySetInnerHTML={{ __html: message }} />}
+            <input style={{ flex: 2, border: 'none' }} ref={(node) => (email = node)} type='email' placeholder={'email'} className='input has-background-grey-dark' />
+            <br />
+            <button className='button has-text-grey-light has-background-grey-dark' style={{ marginLeft: 20, flex: 0.5, border: 'none' }} onClick={submit}>
+                zum
+            </button>
+        </div>
+    )
+}
+
 const url = 'https://lazum.us18.list-manage.com/subscribe/post?u=0d4f58c74f68cad6d6e48dbf0&amp;id=7fffa645b2'
 
 const TemplateWrapper = ({ children }) => {
