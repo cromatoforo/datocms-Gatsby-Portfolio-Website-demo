@@ -109,7 +109,7 @@ const CustomForm = ({ status, message, onValidated }) => {
                 style={{
                     marginTop: '12px',
                     padding: '10px',
-                    width: '160px',
+                    width: '135px',
                 }}
                 ref={(node) => (email = node)}
                 type='email'
