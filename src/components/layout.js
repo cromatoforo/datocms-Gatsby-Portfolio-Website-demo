@@ -10,12 +10,12 @@ import MenuSelectLang from './MenuSelectLang'
 import MenuIcon from './MenuIcon'
 import LocalizedLink from '../utils/LocalizedLink'
 import { SnipcartContext } from 'gatsby-plugin-snipcart-advanced/context'
-import { Button, Pane, Text } from 'evergreen-ui'
+import { Button, Pane, Text, TextInput } from 'evergreen-ui'
 import { ThemeProvider } from 'emotion-theming'
 import theme from '@rebass/preset'
 import { Helmet } from 'react-helmet'
 import '../styles/index.sass'
-
+import MailchimpSubscribe from 'react-mailchimp-subscribe'
 import { Box, Flex } from 'rebass'
 import { Hide } from '@rebass/hide'
 
@@ -79,6 +79,49 @@ const RenderLogo = (props) => {
         </svg>
     )
 }
+
+// a basic form
+const CustomForm = ({ status, message, onValidated }) => {
+    let email
+    const submit = () =>
+        email &&
+        email.value.indexOf('@') > -1 &&
+        onValidated({
+            EMAIL: email.value,
+        })
+
+    return (
+        <div
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                paddingBottom: '12px',
+                paddingTop: '12px',
+            }}
+        >
+            {status === 'sending' && <div style={{ color: 'blue' }}>sending...</div>}
+            {status === 'error' && <div style={{ color: 'red' }} dangerouslySetInnerHTML={{ __html: message }} />}
+            {status === 'success' && <div style={{ color: 'green' }} dangerouslySetInnerHTML={{ __html: message }} />}
+            <Text>
+                <FormattedMessage id='joinTag' />
+            </Text>
+            <TextInput
+                marginTop='12px'
+                style={{
+                    padding: '10px',
+                    width: '160px',
+                }}
+                ref={(node) => (email = node)}
+                type='email'
+                placeholder={'Email'}
+            />
+            <Button marginTop='12px' width='65px' onClick={submit}>
+                <FormattedMessage id='joinButton' />
+            </Button>
+        </div>
+    )
+}
+const url = 'https://lazum.us18.list-manage.com/subscribe/post?u=0d4f58c74f68cad6d6e48dbf0&amp;id=7fffa645b2'
 
 const TemplateWrapper = ({ children }) => {
     const [showMenu, setShowMenu] = useState(false)
@@ -284,13 +327,20 @@ const TemplateWrapper = ({ children }) => {
                                             }
                                         />
                                     </div>
+
                                     {(pathname.indexOf('/products') >= 0 || pathname.indexOf('/store') >= 0 || cartQuantity > 0) && (
-                                        <div>
+                                        <Box pb='12px'>
                                             <LitteCart />
-                                            <br />
-                                            <br />
-                                        </div>
+                                        </Box>
                                     )}
+
+                                    <Box pb='24px'>
+                                        <MailchimpSubscribe
+                                            url={url}
+                                            render={({ subscribe, status, message }) => <CustomForm status={status} message={message} onValidated={(formData) => subscribe(formData)} />}
+                                        />
+                                    </Box>
+
                                     <div className='sidebar__copyright'>{data.homepageEn.data.copyright.text}</div>
                                 </div>
                             </div>

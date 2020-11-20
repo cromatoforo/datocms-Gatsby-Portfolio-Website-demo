@@ -29,6 +29,7 @@
         "react-dom": "^16.10.2",
         "react-helmet": "^6.1.0",
         "react-intl": "^5.0.2",
+        "react-mailchimp-subscribe": "^2.1.0",
         "react-masonry-component": "^6.2.1",
         "react-slick": "^0.25.2",
         "rebass": "^4.0.7",
