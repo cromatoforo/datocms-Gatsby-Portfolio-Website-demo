@@ -13,7 +13,7 @@ export default ({ data }) => (
                 <h1 className='sheet__title'>{data.products.data.title.text}</h1>
                 <p className='sheet__lead'>{data.products.data.subtitle.text}</p>
                 <div className='sheet__slider'>
-                    <Slider infinite={true} autoplay={true} dots={true} slidesToShow={1} arrows={true} speed={500}>
+                    <Slider infinite={true} autoplay={true} dots={true} slidesToShow={1} arrows={true} autoplaySpeed={7000} speed={1000}>
                         <figure>
                             <Img fluid={data.products.data.image1.fluid} />
                             <figcaption>

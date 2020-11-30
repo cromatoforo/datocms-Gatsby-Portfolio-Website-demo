@@ -246,13 +246,13 @@ const TemplateWrapper = ({ children }) => {
                         messages={
                             typeof window !== `undefined`
                                 ? require(`../data/messages/${
-                                      typeof window !== `undefined` ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) : null
-                                  }`)
+                                    typeof window !== `undefined` ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) : null
+                                    }`)
                                 : null
                         }
                     >
                         <div className={`container ${showMenu ? 'is-open' : ''}`}>
-                            <Helmet defer={false} defaultTitle={'test title'} titleTemplate={`%s | ${'test title'}`}>
+                            <Helmet defer={false} defaultTitle={'Lazum'} titleTemplate={`%s | ${'Lazum'}`}>
                                 <html
                                     lang={typeof window !== `undefined` ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) : null}
                                 />
@@ -289,11 +289,11 @@ const TemplateWrapper = ({ children }) => {
                                         <li
                                             className={
                                                 pathname ===
-                                                `/${
+                                                    `/${
                                                     typeof window !== `undefined`
                                                         ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)
                                                         : null
-                                                }/`
+                                                    }/`
                                                     ? 'is-active'
                                                     : null
                                             }
@@ -315,11 +315,11 @@ const TemplateWrapper = ({ children }) => {
                                         <li
                                             className={
                                                 pathname ===
-                                                `/${
+                                                    `/${
                                                     typeof window !== `undefined`
                                                         ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)
                                                         : null
-                                                }/about`
+                                                    }/about`
                                                     ? 'is-active'
                                                     : null
                                             }
@@ -339,21 +339,21 @@ const TemplateWrapper = ({ children }) => {
                                             langs={
                                                 typeof window !== `undefined`
                                                     ? getLangs(
-                                                          data.site.siteMetadata.languages.langs,
-                                                          typeof window !== `undefined`
-                                                              ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)
-                                                              : null,
-                                                          typeof window !== `undefined`
-                                                              ? getUrlForLang(
-                                                                    `/${
-                                                                        typeof window !== `undefined`
-                                                                            ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)
-                                                                            : null
-                                                                    }/`,
-                                                                    pathname
-                                                                )
-                                                              : null
-                                                      )
+                                                        data.site.siteMetadata.languages.langs,
+                                                        typeof window !== `undefined`
+                                                            ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)
+                                                            : null,
+                                                        typeof window !== `undefined`
+                                                            ? getUrlForLang(
+                                                                `/${
+                                                                typeof window !== `undefined`
+                                                                    ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)
+                                                                    : null
+                                                                }/`,
+                                                                pathname
+                                                            )
+                                                            : null
+                                                    )
                                                     : null
                                             }
                                         />
@@ -405,11 +405,11 @@ const TemplateWrapper = ({ children }) => {
                                                     name='homeIcon'
                                                     color={
                                                         pathname ===
-                                                        `/${
+                                                            `/${
                                                             typeof window !== `undefined`
                                                                 ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)
                                                                 : null
-                                                        }/`
+                                                            }/`
                                                             ? '#FCB913'
                                                             : 'white'
                                                     }
@@ -419,17 +419,17 @@ const TemplateWrapper = ({ children }) => {
                                                 <Text
                                                     color={
                                                         pathname ===
-                                                        `/${
+                                                            `/${
                                                             typeof window !== `undefined`
                                                                 ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)
                                                                 : null
-                                                        }/`
+                                                            }/`
                                                             ? '#FCB913'
                                                             : 'white'
                                                     }
                                                 >
                                                     {typeof window !== `undefined` &&
-                                                    getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) === 'es'
+                                                        getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) === 'es'
                                                         ? data.homepageEs.data.homeicon.text
                                                         : data.homepageEn.data.homeicon.text}
                                                 </Text>
@@ -444,7 +444,7 @@ const TemplateWrapper = ({ children }) => {
                                             <Box flex={1}>
                                                 <Text color={pathname.indexOf('/projects') >= 0 ? '#FCB913' : 'white'}>
                                                     {typeof window !== `undefined` &&
-                                                    getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) === 'es'
+                                                        getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) === 'es'
                                                         ? data.homepageEs.data.projectsicon.text
                                                         : data.homepageEn.data.projectsicon.text}
                                                 </Text>
@@ -459,7 +459,7 @@ const TemplateWrapper = ({ children }) => {
                                             <Box flex={1}>
                                                 <Text color={pathname.indexOf('/products') >= 0 || pathname.indexOf('/store') >= 0 ? '#FCB913' : 'white'}>
                                                     {typeof window !== `undefined` &&
-                                                    getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) === 'es'
+                                                        getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) === 'es'
                                                         ? data.homepageEs.data.tiendaicon.text
                                                         : data.homepageEn.data.tiendaicon.text}
                                                 </Text>
@@ -475,42 +475,42 @@ const TemplateWrapper = ({ children }) => {
                                                 <Box flex={1}>
                                                     <Text color='white'>
                                                         {typeof window !== `undefined` &&
-                                                        getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) === 'es'
+                                                            getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname) === 'es'
                                                             ? 'Ver ' + data.homepageEs.data.carticon.text + ' (' + cartQuantity + ')'
                                                             : 'View ' + data.homepageEn.data.carticon.text + ' (' + cartQuantity + ')'}
                                                     </Text>
                                                 </Box>
                                             </Box>
                                         ) : (
-                                            <Box flex={1}>
-                                                <MenuSelectLang
-                                                    langs={
-                                                        typeof window !== `undefined`
-                                                            ? getLangs(
-                                                                  data.site.siteMetadata.languages.langs,
-                                                                  typeof window !== `undefined`
-                                                                      ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)
-                                                                      : null,
-                                                                  typeof window !== `undefined`
-                                                                      ? getUrlForLang(
+                                                <Box flex={1}>
+                                                    <MenuSelectLang
+                                                        langs={
+                                                            typeof window !== `undefined`
+                                                                ? getLangs(
+                                                                    data.site.siteMetadata.languages.langs,
+                                                                    typeof window !== `undefined`
+                                                                        ? getCurrentLangKey(data.site.siteMetadata.languages.langs, data.site.siteMetadata.languages.defaultLangKey, pathname)
+                                                                        : null,
+                                                                    typeof window !== `undefined`
+                                                                        ? getUrlForLang(
                                                                             `/${
-                                                                                typeof window !== `undefined`
-                                                                                    ? getCurrentLangKey(
-                                                                                          data.site.siteMetadata.languages.langs,
-                                                                                          data.site.siteMetadata.languages.defaultLangKey,
-                                                                                          pathname
-                                                                                      )
-                                                                                    : null
+                                                                            typeof window !== `undefined`
+                                                                                ? getCurrentLangKey(
+                                                                                    data.site.siteMetadata.languages.langs,
+                                                                                    data.site.siteMetadata.languages.defaultLangKey,
+                                                                                    pathname
+                                                                                )
+                                                                                : null
                                                                             }/`,
                                                                             pathname
                                                                         )
-                                                                      : null
-                                                              )
-                                                            : null
-                                                    }
-                                                />
-                                            </Box>
-                                        )}
+                                                                        : null
+                                                                )
+                                                                : null
+                                                        }
+                                                    />
+                                                </Box>
+                                            )}
                                     </Flex>
                                 </Flex>
                             </Hide>

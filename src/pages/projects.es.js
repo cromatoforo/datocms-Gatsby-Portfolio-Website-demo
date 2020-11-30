@@ -5,57 +5,41 @@ import Masonry from 'react-masonry-component'
 import Layout from '../components/layout'
 import LocalizedLink from '../utils/LocalizedLink'
 import { Flex, Box, Text } from 'rebass'
-
 import Slider from 'react-slick'
+
 const ProjectsPage = ({ data }) => (
     <Layout>
         <article className='sheet'>
             <div className='sheet__inner'>
                 <Box>
                     <Box>
-                        <Box p={12} color='#40436A'>
+                        <Box pb={1} color='#40436A'>
                             <Text
-                                fontSize={3}
+                                fontSize={2}
                                 dangerouslySetInnerHTML={{
                                     __html: data.projectspage.data.title.text,
                                 }}
                             />
                         </Box>
-                        <Box p={12} color='#40436A'>
-                            <Text
-                                fontSize={3}
-                                dangerouslySetInnerHTML={{
-                                    __html: data.projectspage.data.subtitle.text,
-                                }}
-                            />
-                        </Box>
 
-                        <Box p={0} pb={4} color='#40436A'>
-                            <Slider infinite={true} autoplay={true} dots={true} slidesToShow={1} arrows={true} speed={500}>
+
+                        <Box p={0} pb={2} color='#40436A'>
+                            <Slider infinite={true} autoplay={true} dots={false} slidesToShow={1} arrows={false} autoplaySpeed={13000} speed={3000}>
                                 <figure>
                                     <Img fluid={data.projectspage.data.image1.fluid} />
-                                    <figcaption>
-                                        <h6 className='card__title'>{data.projectspage.data.caption1.text}</h6>
-                                    </figcaption>
                                 </figure>
                                 <figure>
                                     <Img fluid={data.projectspage.data.image2.fluid} />
-                                    <figcaption>
-                                        <h6 className='card__title'>{data.projectspage.data.caption2.text}</h6>
-                                    </figcaption>
                                 </figure>
                                 <figure>
                                     <Img fluid={data.projectspage.data.image3.fluid} />
-                                    <figcaption>
-                                        <h6 className='card__title'>{data.projectspage.data.caption3.text}</h6>
-                                    </figcaption>
                                 </figure>
                             </Slider>
                         </Box>
 
-                        <Box p={12} color='#40436A'>
+                        <Box pb={2} color='#40436A'>
                             <Text
-                                fontSize={3}
+                                fontSize={2}
                                 dangerouslySetInnerHTML={{
                                     __html: data.projectspage.data.description.html,
                                 }}
@@ -69,10 +53,10 @@ const ProjectsPage = ({ data }) => (
                                     <Box sx={{ flex: [1, 1 / 2] }} backgroundColor='#C6C7E0'>
                                         <Flex flexDirection='column'>
                                             <Box my={1} mb={1} color='#000' p={2}>
-                                                <Text fontWeight='700' fontSize={[2, 3]}>
+                                                <Text fontWeight='700' fontSize={[2, 2]}>
                                                     {project.data.title.text}
                                                 </Text>
-                                                <Text mt={[0, 20]} fontSize={[2, 3]}>
+                                                <Text mt={[0, 20]} fontSize={[2, 2]}>
                                                     {project.data.subtitle.text}
                                                 </Text>
                                             </Box>

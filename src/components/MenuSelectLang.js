@@ -11,17 +11,17 @@ const MenuSelectLang = (props) => {
 
     const links = props.langs
         ? props.langs.map((lang) =>
-              lang.selected === false ? (
-                  <Link key={lang.langKey} to={lang.link}>
-                      <Box key={lang.langKey} onClick={() => changeLanguage(lang.langKey)}>
-                          <Box pl='5px' flex={1}>
-                              <MenuIcon name='idiomaIcon' color='white' />
-                          </Box>
-                          <Text>{lang.langKey === 'es' ? 'Español' : 'English'}</Text>
-                      </Box>
-                  </Link>
-              ) : null
-          )
+            lang.selected === false ? (
+                <Link key={lang.langKey} to={lang.link}>
+                    <Box key={lang.langKey} onClick={() => changeLanguage(lang.langKey)}>
+                        <Box pl='5px' flex={1}>
+                            <MenuIcon name='idiomaIcon' color='white' />
+                        </Box>
+                        <Text color='white'>{lang.langKey === 'es' ? 'Español' : 'English'}</Text>
+                    </Box>
+                </Link>
+            ) : null
+        )
         : null
 
     return <Box>{links}</Box>

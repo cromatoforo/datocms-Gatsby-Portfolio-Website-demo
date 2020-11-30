@@ -13,13 +13,10 @@ export default ({ data }) => (
                 <p className='sheet__lead'>{data.prismicProject.data.subtitle.text}</p>
                 <div
                     className='sheet__body'
-                    dangerouslySetInnerHTML={{
-                        __html: data.prismicProject.data.description.html,
-                    }}
+                    dangerouslySetInnerHTML={{ __html: data.prismicProject.data.description.html }}
                 />
-
                 <div className='sheet__slider'>
-                    <Slider infinite={true} autoplay={true} dots={true} slidesToShow={1} arrows={true} speed={500}>
+                    <Slider infinite={true} autoplay={true} dots={true} slidesToShow={1} arrows={true} autoplaySpeed={7000} speed={1000}>
                         <figure>
                             <Img fluid={data.prismicProject.data.image1.fluid} />
                             <figcaption>

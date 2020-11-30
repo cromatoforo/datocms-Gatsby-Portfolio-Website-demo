@@ -12,58 +12,37 @@ const ProductsPage = ({ data }) => (
         <article className='sheet'>
             <div className='sheet__inner'>
                 <Box>
-                    <Box>
-                        <Box p={12} color='#40436A'>
-                            <Text
-                                fontSize={3}
-                                dangerouslySetInnerHTML={{
-                                    __html: data.productspage.data.title.html,
-                                }}
-                            />
-                        </Box>
-                        <Box p={12} color='#40436A'>
-                            <Text
-                                fontSize={3}
-                                dangerouslySetInnerHTML={{
-                                    __html: data.productspage.data.sub_title.html,
-                                }}
-                            />
-                        </Box>
 
-                        <Box p={12} color='#40436A'>
-                            <div className='sheet__slider'>
-                                <Slider infinite={true} autoplay={true} dots={true} slidesToShow={1} arrows={true} speed={500}>
-                                    <figure>
-                                        <Img fluid={data.productspage.data.image1.fluid} />
-                                        <figcaption>
-                                            <h6 className='card__title'>{data.productspage.data.caption1.text}</h6>
-                                        </figcaption>
-                                    </figure>
-                                    <figure>
-                                        <Img fluid={data.productspage.data.image2.fluid} />
-                                        <figcaption>
-                                            <h6 className='card__title'>{data.productspage.data.caption2.text}</h6>
-                                        </figcaption>
-                                    </figure>
-                                    <figure>
-                                        <Img fluid={data.productspage.data.image3.fluid} />
-                                        <figcaption>
-                                            <h6 className='card__title'>{data.productspage.data.caption3.text}</h6>
-                                        </figcaption>
-                                    </figure>
-                                </Slider>
-                            </div>
-                        </Box>
-
-                        <Box p={2} pb={4} color='#40436A'>
-                            <Text
-                                fontSize={2}
-                                dangerouslySetInnerHTML={{
-                                    __html: data.productspage.data.about_lazum_store.html,
-                                }}
-                            />
-                        </Box>
+                    <Box pb={2} color='#40436A'>
+                        <Text
+                            fontSize={3}
+                            dangerouslySetInnerHTML={{
+                                __html: data.productspage.data.title.html,
+                            }}
+                        />
                     </Box>
+                    <Box p={0} pb={2} color='#40436A'>
+                        <Slider infinite={true} autoplay={true} dots={false} slidesToShow={1} arrows={false} autoplaySpeed={13000} speed={3000}>
+                            <figure>
+                                <Img fluid={data.productspage.data.image1.fluid} />
+                            </figure>
+                            <figure>
+                                <Img fluid={data.productspage.data.image2.fluid} />
+                            </figure>
+                            <figure>
+                                <Img fluid={data.productspage.data.image3.fluid} />
+                            </figure>
+                        </Slider>
+                    </Box>
+                    <Box pb={2} color='#40436A'>
+                        <Text
+                            fontSize={2}
+                            dangerouslySetInnerHTML={{
+                                __html: data.productspage.data.about_lazum_store.html,
+                            }}
+                        />
+                    </Box>
+
                     <Box>
                         <Masonry className='showcase'>
                             {data.products.edges.map(({ node: product }) => (
@@ -97,7 +76,7 @@ const ProductsPage = ({ data }) => (
                                                         className='snipcart-add-item'
                                                         data-item-id={product.uid}
                                                         data-item-price={product.data.price}
-                                                        data-item-url={'/es/store'}
+                                                        data-item-url={'/en/store'}
                                                         data-item-description={product.data.subtitle.text}
                                                         data-item-image={product.data.image1.url}
                                                         data-item-name={product.data.title.text}
