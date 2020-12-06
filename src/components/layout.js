@@ -397,7 +397,7 @@ const TemplateWrapper = ({ children }) => {
                                 {children}
                             </div>
                             <Hide medium large>
-                                <Flex sx={{ alignContent: 'center', py: '8px', backgroundColor: '#41416A', overflow: 'hidden', position: 'fixed', bottom: 0, width: '100%' }}>
+                                <Flex className='footmenu' sx={{ alignContent: 'center', py: '8px', backgroundColor: '#41416A', overflow: 'hidden', position: 'fixed', bottom: 0, width: '100%' }}>
                                     <Flex flexDirection='column' sx={{ alignItems: 'center' }} flex={1}>
                                         <LocalizedLink to='/'>
                                             <Box flex={1}>
