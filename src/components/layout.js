@@ -17,7 +17,11 @@ import { Helmet } from 'react-helmet'
 import '../styles/index.sass'
 import MailchimpSubscribe from 'react-mailchimp-subscribe'
 import { Box, Flex } from 'rebass'
+import { Text as Text2 } from 'rebass'
 import { Hide } from '@rebass/hide'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faYoutube, faInstagram } from '@fortawesome/free-brands-svg-icons'
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 const LitteCart = () => {
     const { state } = useContext(SnipcartContext)
@@ -329,11 +333,11 @@ const TemplateWrapper = ({ children }) => {
                                             </LocalizedLink>
                                         </li>
                                     </ul>
-                                    <p className='sidebar__social'>
-                                        {data.allPrismicSocialbutton.edges.map(({ node: profile }) => (
-                                            <a key={profile.data.title.text} href={profile.data.url.text} target='blank' className={`social social--${profile.data.title.text.toLowerCase()}`} />
-                                        ))}
-                                    </p>
+                                    <Box pb={3}>
+                                        <div><a href='mailto:hola@tallerlazum.com'><FontAwesomeIcon icon={faEnvelope} color={'#777'} /><Text paddingLeft={8} >email - hola@tallerlazum.com</Text></a></div>
+                                        <div><a target='_blank' href='https://www.youtube.com/channel/UC7wDvqVxNWTI4zLmEIZ_yyA'><FontAwesomeIcon color={'#777'} icon={faYoutube} /><Text paddingLeft={8}>youtube - lazum</Text></a></div>
+                                        <div><a target='_blank' href='https://www.instagram.com/tallerlazum/'><FontAwesomeIcon color={'#777'} icon={faInstagram} /><Text paddingLeft={8}>instagram - tallerlazum</Text></a></div>
+                                    </Box>
                                     <div>
                                         <SelectLanguage
                                             langs={

@@ -159,7 +159,7 @@ export const query = graphql`
                 }
             }
         }
-        products: allPrismicProducts(filter: { lang: { eq: "es-pr" } }) {
+        products: allPrismicProducts(sort: {order: DESC, fields: last_publication_date},filter: { lang: { eq: "es-pr" } }) {
             edges {
                 node {
                     uid

@@ -116,7 +116,7 @@ export const query = graphql`
                 }
             }
         }
-        projects: allPrismicProject(filter: { lang: { eq: "en-us" } }) {
+        projects: allPrismicProject(sort: {order: DESC, fields: last_publication_date}, filter: { lang: { eq: "en-us" } }) {
             edges {
                 node {
                     uid

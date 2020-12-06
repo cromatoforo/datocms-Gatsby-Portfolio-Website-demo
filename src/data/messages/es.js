@@ -8,6 +8,6 @@ module.exports = {
     cartTotal: 'Total de carro',
     viewCart: 'Ver carro',
     addCart: 'Añadir al carro',
-    joinButton: 'Unate',
+    joinButton: 'Únase',
     joinTag: 'Escribe tu correo para recibir actualizaciones',
 }

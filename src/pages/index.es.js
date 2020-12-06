@@ -93,6 +93,7 @@ const IndexPage = ({ data }) => (
                                                 borderRadius: 3,
                                                 color: '#000',
                                                 backgroundColor: '#FCB515',
+                                                cursor: 'pointer'
                                             }}
                                             dangerouslySetInnerHTML={{
                                                 __html: data.homepage.data.store_button.html,

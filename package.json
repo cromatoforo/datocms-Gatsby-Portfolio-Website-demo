@@ -4,6 +4,10 @@
     "version": "1.0.0",
     "author": "Rumi Humphrey <hola@tallerlazum.com>",
     "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^1.2.32",
+        "@fortawesome/free-brands-svg-icons": "^5.15.1",
+        "@fortawesome/free-solid-svg-icons": "^5.15.1",
+        "@fortawesome/react-fontawesome": "^0.1.13",
         "@rebass/hide": "^1.0.0-2",
         "@rebass/preset": "^4.0.5",
         "dotenv": "^8.1.0",
