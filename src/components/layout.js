@@ -333,11 +333,7 @@ const TemplateWrapper = ({ children }) => {
                                             </LocalizedLink>
                                         </li>
                                     </ul>
-                                    <Box pb={3}>
-                                        <div><a href='mailto:hola@tallerlazum.com'><FontAwesomeIcon icon={faEnvelope} color={'#777'} /><Text paddingLeft={8} >email - hola@tallerlazum.com</Text></a></div>
-                                        <div><a target='_blank' href='https://www.youtube.com/channel/UC7wDvqVxNWTI4zLmEIZ_yyA'><FontAwesomeIcon color={'#777'} icon={faYoutube} /><Text paddingLeft={8}>youtube - lazum</Text></a></div>
-                                        <div><a target='_blank' href='https://www.instagram.com/tallerlazum/'><FontAwesomeIcon color={'#777'} icon={faInstagram} /><Text paddingLeft={8}>instagram - tallerlazum</Text></a></div>
-                                    </Box>
+
                                     <div>
                                         <SelectLanguage
                                             langs={
@@ -362,6 +358,12 @@ const TemplateWrapper = ({ children }) => {
                                             }
                                         />
                                     </div>
+
+                                    <Box pb={3}>
+                                        <div><a href='mailto:hola@tallerlazum.com'><FontAwesomeIcon icon={faEnvelope} color={'#777'} /><Text paddingLeft={8} >email - hola@tallerlazum.com</Text></a></div>
+                                        <div><a target='_blank' href='https://www.youtube.com/channel/UC7wDvqVxNWTI4zLmEIZ_yyA'><FontAwesomeIcon color={'#777'} icon={faYoutube} /><Text paddingLeft={8}>youtube - lazum</Text></a></div>
+                                        <div><a target='_blank' href='https://www.instagram.com/tallerlazum/'><FontAwesomeIcon color={'#777'} icon={faInstagram} /><Text paddingLeft={8}>instagram - tallerlazum</Text></a></div>
+                                    </Box>
 
                                     {(pathname.indexOf('/products') >= 0 || pathname.indexOf('/store') >= 0 || cartQuantity > 0) && (
                                         <Box pb='12px'>
