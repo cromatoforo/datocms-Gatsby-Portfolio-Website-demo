@@ -12,15 +12,15 @@ const ProductsPage = ({ data }) => (
         <article className='sheet'>
             <div className='sheet__inner'>
                 <Box>
-
                     <Box pb={2} color='#40436A'>
                         <Text
                             fontSize={3}
                             dangerouslySetInnerHTML={{
-                                __html: data.productspage.data.title.html,
+                                __html: data.productspage.data.title.html
                             }}
                         />
                     </Box>
+
                     <Box p={0} pb={2} color='#40436A'>
                         <Slider infinite={true} autoplay={true} dots={false} slidesToShow={1} arrows={false} autoplaySpeed={13000} speed={3000}>
                             <figure>
@@ -34,11 +34,12 @@ const ProductsPage = ({ data }) => (
                             </figure>
                         </Slider>
                     </Box>
-                    <Box pb={0} color='#40436A'>
+
+                    <Box pt={1} pb={3} color='#40436A'>
                         <Text
                             fontSize={2}
                             dangerouslySetInnerHTML={{
-                                __html: data.productspage.data.about_lazum_store.html,
+                                __html: data.productspage.data.sub_title.html,
                             }}
                         />
                     </Box>
@@ -92,6 +93,20 @@ const ProductsPage = ({ data }) => (
                             ))}
                         </Masonry>
                     </Box>
+
+
+
+                    <Box pb={1} color='#40436A'>
+                        <Text
+                            fontSize={2}
+                            dangerouslySetInnerHTML={{
+                                __html: data.productspage.data.about_lazum_store.html,
+                            }}
+                        />
+                    </Box>
+
+
+
                 </Box>
             </div>
         </article>
