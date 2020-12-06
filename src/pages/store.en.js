@@ -62,7 +62,7 @@ const ProductsPage = ({ data }) => (
                                                     __html: product.data.subtitle.text,
                                                 }}
                                             ></div>
-                                            <Flex flexDirection={'row'}>
+                                            <Flex flexDirection={'column'}>
                                                 <Box flex={0.5}>
                                                     <Text
                                                         sx={{ paddingTop: 10, fontWeight: 'bold', fontSize: 2 }}

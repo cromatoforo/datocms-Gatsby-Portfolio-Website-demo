@@ -175,7 +175,7 @@ export const query = graphql`
                 }
             }
         }
-        projects: allPrismicProject(limit: 3, filter: { lang: { eq: "es-pr" } }) {
+        projects: allPrismicProject(limit: 3, sort: {order: DESC, fields: last_publication_date}, filter: {lang: {eq: "es-pr"}}) {
             edges {
                 node {
                     uid
